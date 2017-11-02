@@ -1,4 +1,4 @@
-package com.tressler.travistressler.lyricsfurb.PlaylistsView;
+package com.tressler.travistressler.lyricsfurb.AllSongsView;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,14 +17,14 @@ import butterknife.ButterKnife;
  * Created by travistressler on 11/2/17.
  */
 
-public class PlayListsFragment extends Fragment implements PlayListsView {
+public class AllSongsFragment extends Fragment implements AllSongsView {
 
-    @Inject protected PlayListsPresenter presenter;
+    @Inject protected AllSongsPresenter presenter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_play_lists, container, false);
+        View view = inflater.inflate(R.layout.fragment_all_songs, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -35,11 +35,11 @@ public class PlayListsFragment extends Fragment implements PlayListsView {
         presenter.attachView(this);
     }
 
-    public static PlayListsFragment newInstance() {
+    public static AllSongsFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        PlayListsFragment fragment = new PlayListsFragment();
+        AllSongsFragment fragment = new AllSongsFragment();
         fragment.setArguments(args);
         return fragment;
     }
