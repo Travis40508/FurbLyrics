@@ -5,4 +5,5 @@ package com.tressler.travistressler.lyricsfurb.SplashView;
  */
 
 public interface SplashView {
+    void startMainActivity();
 }
