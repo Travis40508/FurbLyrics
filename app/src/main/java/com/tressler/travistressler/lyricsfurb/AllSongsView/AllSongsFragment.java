@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tressler.travistressler.lyricsfurb.Application.di.LyricsApplication;
 import com.tressler.travistressler.lyricsfurb.R;
 
 import javax.inject.Inject;
@@ -26,6 +27,7 @@ public class AllSongsFragment extends Fragment implements AllSongsView {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all_songs, container, false);
         ButterKnife.bind(this, view);
+        ((LyricsApplication)getActivity().getApplication()).getComponent().inject(this);
         return view;
     }
 

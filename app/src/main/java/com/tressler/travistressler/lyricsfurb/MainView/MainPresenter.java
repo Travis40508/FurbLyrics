@@ -17,5 +17,8 @@ public class MainPresenter {
 
     public void attachView(MainView view) {
         this.view = view;
+        if(this.view != null) {
+            view.populateFragmentList();
+        }
     }
 }

@@ -5,4 +5,5 @@ package com.tressler.travistressler.lyricsfurb.MainView;
  */
 
 public interface MainView {
+    void populateFragmentList();
 }
