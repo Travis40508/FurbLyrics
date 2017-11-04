@@ -59,4 +59,7 @@ dependencies {
     //RecyclerView
     implementation "com.android.support:recyclerview-v7:26.1.0"
 
+    //RxJava2 Adapter
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
 }

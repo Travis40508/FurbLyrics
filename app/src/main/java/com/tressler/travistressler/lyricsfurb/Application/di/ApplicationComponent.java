@@ -8,12 +8,15 @@ import com.tressler.travistressler.lyricsfurb.PlayListView.PlayListFragment;
 import com.tressler.travistressler.lyricsfurb.PlaylistsView.PlayListsFragment;
 import com.tressler.travistressler.lyricsfurb.SplashView.SplashActivity;
 
+import javax.inject.Singleton;
+
 import dagger.Component;
 
 /**
  * Created by travistressler on 11/2/17.
  */
 
+@Singleton
 @Component(modules = {ApplicationModule.class})
 public interface ApplicationComponent {
     void inject(SplashActivity splashActivity);
