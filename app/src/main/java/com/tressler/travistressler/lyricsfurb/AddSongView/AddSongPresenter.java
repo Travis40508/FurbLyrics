@@ -85,8 +85,10 @@ public class AddSongPresenter {
                     PlaylistEntity playlistEntity = songDatabase.playlistDao().getChosenPlaylist(playListSelected);
                     SongEntity newSong = new SongEntity(songTitle, artistName, song.getLyrics());
                     songDatabase.songDao().insertSongEntity(newSong);
-                    playlistEntity.addToPlaylist(newSong.getSongTitle());
-                    songDatabase.playlistDao().updatePlaylist(playlistEntity);
+                    if(playlistEntity != null) {
+                        playlistEntity.addToPlaylist(newSong.getSongTitle());
+                        songDatabase.playlistDao().updatePlaylist(playlistEntity);
+                    }
                 }
             });
             view.hideProgressBar();

@@ -56,6 +56,8 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
         holder.bindView(songList.get(position));
         holder.cardView.setOnClickListener(holder.onCellClicked(songList.get(position)));
         holder.cardView.setOnLongClickListener(holder.onCellLongClicked(songList.get(position)));
+        holder.upArrow.setOnClickListener(holder.onUpArrowClicked(songList.get(position)));
+        holder.downArrow.setOnClickListener(holder.onDownArrowClicked(songList.get(position)));
     }
 
     @Override
@@ -111,6 +113,15 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
         public void bindView(SongEntity songEntity) {
             artistName.setText(songEntity.getSongArtist());
             songTitle.setText(songEntity.getSongTitle());
+            if(songEntity.isEditingEnabled()) {
+                upArrow.setVisibility(View.VISIBLE);
+                downArrow.setVisibility(View.VISIBLE);
+                deleteButton.setVisibility(View.VISIBLE);
+            } else {
+                upArrow.setVisibility(View.GONE);
+                downArrow.setVisibility(View.GONE);
+                deleteButton.setVisibility(View.GONE);
+            }
         }
 
         public View.OnClickListener onCellClicked(SongEntity songEntity) {
@@ -136,11 +147,40 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
                 @Override
                 public boolean onLongClick(View view) {
                     if(source.equalsIgnoreCase("playlist")) {
-                        upArrow.setVisibility(View.VISIBLE);
-                        downArrow.setVisibility(View.VISIBLE);
-                        deleteButton.setVisibility(View.VISIBLE);
+                        for(SongEntity song : songList) {
+                            song.setEditingEnabled(true);
+                            notifyDataSetChanged();
+                        }
                     }
                     return false;
+                }
+            };
+        }
+
+        public View.OnClickListener onUpArrowClicked(SongEntity songEntity) {
+            return new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int indexOfSong = songList.indexOf(songEntity);
+                    if(indexOfSong > 0) {
+                        songList.remove(songEntity);
+                        songList.add(indexOfSong - 1, songEntity);
+                        notifyDataSetChanged();
+                    }
+                }
+            };
+        }
+
+        public View.OnClickListener onDownArrowClicked(SongEntity songEntity) {
+            return new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int indexOfSong = songList.indexOf(songEntity);
+                    if(indexOfSong < songList.size() - 1) {
+                        songList.remove(songEntity);
+                        songList.add(indexOfSong + 1, songEntity);
+                        notifyDataSetChanged();
+                    }
                 }
             };
         }

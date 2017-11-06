@@ -18,11 +18,13 @@ public class SongEntity {
     private String songTitle;
     private String songArtist;
     private String songLyrics;
+    private boolean editingEnabled;
 
     public SongEntity(String songTitle, String songArtist, String songLyrics) {
         this.songTitle = songTitle;
         this.songArtist = songArtist;
         this.songLyrics = songLyrics;
+        this.editingEnabled = false;
     }
 
     public String getSongTitle() {
@@ -58,4 +60,11 @@ public class SongEntity {
         this.songLyrics = songLyrics;
     }
 
+    public boolean isEditingEnabled() {
+        return editingEnabled;
+    }
+
+    public void setEditingEnabled(boolean editingEnabled) {
+        this.editingEnabled = editingEnabled;
+    }
 }
