@@ -86,15 +86,21 @@ public class AllSongsFragment extends Fragment implements AllSongsView, SongList
 
     @Override
     public void showListOfSongs(List<SongEntity> songEntities) {
-        adapter = new SongListAdapter(songEntities, this);
+        adapter = new SongListAdapter(songEntities, this, "allSongsList");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter.notifyDataSetChanged();
     }
 
+
     @Override
-    public void onCellClicked(SongEntity songEntity) {
+    public void onChosenSongCellClicked(SongEntity songEntity) {
+
+    }
+
+    @Override
+    public void onAllSongCellClicked(SongEntity songEntity) {
 
     }
 }

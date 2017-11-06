@@ -26,9 +26,10 @@ import butterknife.OnClick;
 public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongViewHolder> {
 
     private final Callback callback;
+    private final String source;
     private List<SongEntity> songList;
 
-    public SongListAdapter(List<SongEntity> songList, Callback callback) {
+    public SongListAdapter(List<SongEntity> songList, Callback callback, String source) {
         Collections.sort(songList, new Comparator<SongEntity>() {
             @Override
             public int compare(SongEntity songEntity, SongEntity t1) {
@@ -37,6 +38,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
         });
         this.songList = songList;
         this.callback = callback;
+        this.source = source;
     }
 
     @Override
@@ -62,6 +64,12 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
 
     public void addSong(SongEntity songEntity) {
         songList.add(songEntity);
+        Collections.sort(songList, new Comparator<SongEntity>() {
+            @Override
+            public int compare(SongEntity songEntity, SongEntity t1) {
+                return songEntity.getSongTitle().compareTo(t1.getSongTitle());
+            }
+        });
         notifyDataSetChanged();
     }
 
@@ -92,16 +100,19 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
                 @Override
                 public void onClick(View view) {
                     songList.remove(songEntity);
-                    callback.onCellClicked(songEntity);
+                    if(source.equalsIgnoreCase("allSongsCreatePlaylist")) {
+                        callback.onAllSongCellClicked(songEntity);
+                    } else if(source.equalsIgnoreCase("chosenSongsCreatePlaylist")) {
+                        callback.onChosenSongCellClicked(songEntity);
+                    }
                     notifyDataSetChanged();
-
-                    //TODO pass in a string into the constructor specifying which view it's being adapted to so it knows how it will handle click events.
                 }
             };
         }
     }
 
     public interface Callback {
-        void onCellClicked(SongEntity songEntity);
+        void onChosenSongCellClicked(SongEntity songEntity);
+        void onAllSongCellClicked(SongEntity songEntity);
     }
 }

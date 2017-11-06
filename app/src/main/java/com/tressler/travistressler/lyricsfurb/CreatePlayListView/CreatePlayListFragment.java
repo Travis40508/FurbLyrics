@@ -76,7 +76,7 @@ public class CreatePlayListFragment extends Fragment implements CreatePlayListVi
 
     @Override
     public void showSongList(List<SongEntity> songEntities) {
-        allSongsAdapter = new SongListAdapter(songEntities, this);
+        allSongsAdapter = new SongListAdapter(songEntities, this, "allSongsCreatePlaylist");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerViewAllSongs.setAdapter(allSongsAdapter);
         recyclerViewAllSongs.setLayoutManager(linearLayoutManager);
@@ -86,7 +86,7 @@ public class CreatePlayListFragment extends Fragment implements CreatePlayListVi
     @Override
     public void setupChosenSongs() {
         List<SongEntity> songEntitiesList = new ArrayList<>();
-        chosenSongsAdapter = new SongListAdapter(songEntitiesList, this);
+        chosenSongsAdapter = new SongListAdapter(songEntitiesList, this, "chosenSongsCreatePlaylist");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerViewChosenSongs.setAdapter(chosenSongsAdapter);
         recyclerViewChosenSongs.setLayoutManager(linearLayoutManager);
@@ -103,9 +103,16 @@ public class CreatePlayListFragment extends Fragment implements CreatePlayListVi
         savePlayListButton.setVisibility(View.GONE);
     }
 
+
     @Override
-    public void onCellClicked(SongEntity songEntity) {
-        presenter.cellClicked(songEntity, chosenSongsAdapter.getItemCount());
+    public void onChosenSongCellClicked(SongEntity songEntity) {
+        presenter.chosenSongListCellClicked(songEntity, chosenSongsAdapter.getItemCount());
+        allSongsAdapter.addSong(songEntity);
+    }
+
+    @Override
+    public void onAllSongCellClicked(SongEntity songEntity) {
+        presenter.allSongListCellClicked(songEntity, chosenSongsAdapter.getItemCount());
         chosenSongsAdapter.addSong(songEntity);
     }
 }

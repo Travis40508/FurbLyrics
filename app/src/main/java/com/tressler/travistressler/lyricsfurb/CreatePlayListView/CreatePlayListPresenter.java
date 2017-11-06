@@ -60,4 +60,22 @@ public class CreatePlayListPresenter {
             view.hideSavePlaylistButton();
         }
     }
+
+    public void chosenSongListCellClicked(SongEntity songEntity, int itemCount) {
+        songsToBeSaved.remove(songEntity);
+        if(itemCount > 0) {
+            view.showSavePlaylistButton();
+        } else {
+            view.hideSavePlaylistButton();
+        }
+    }
+
+    public void allSongListCellClicked(SongEntity songEntity, int itemCount) {
+        songsToBeSaved.add(songEntity);
+        if(itemCount > 0) {
+            view.showSavePlaylistButton();
+        } else {
+            view.hideSavePlaylistButton();
+        }
+    }
 }
