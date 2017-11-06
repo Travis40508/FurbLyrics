@@ -6,6 +6,9 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+
 import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 
 /**
@@ -19,5 +22,5 @@ public interface PlaylistDao {
     void insertPlaylist(PlaylistEntity playlistEntity);
 
     @Query("SELECT * FROM PlaylistEntity")
-    List<PlaylistEntity> getPlaylists();
+    Flowable<List<PlaylistEntity>> getPlaylists();
 }

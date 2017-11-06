@@ -5,4 +5,6 @@ package com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase;
  */
 
 public interface SongDatabase {
+
+    SongDao songDao();
 }

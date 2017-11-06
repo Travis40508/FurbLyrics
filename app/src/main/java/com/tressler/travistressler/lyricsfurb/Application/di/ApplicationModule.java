@@ -14,6 +14,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.Scheduler;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -67,5 +69,11 @@ public class ApplicationModule {
     @Provides
     public LyricsApi providesLyricsApi(LyricsRetrofit lyricsRetrofit) {
         return new LyricsApiImpl(lyricsRetrofit);
+    }
+
+    @Singleton
+    @Provides
+    public Scheduler providesWorkerThread() {
+        return Schedulers.io();
     }
 }

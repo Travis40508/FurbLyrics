@@ -6,6 +6,9 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+
 import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 
 /**
@@ -19,5 +22,5 @@ public interface SongDao {
     void insertSongEntity(SongEntity songEntity);
 
     @Query("SELECT * FROM SongEntity")
-    List<SongEntity> getSongs();
+    Flowable<List<SongEntity>> getSongs();
 }

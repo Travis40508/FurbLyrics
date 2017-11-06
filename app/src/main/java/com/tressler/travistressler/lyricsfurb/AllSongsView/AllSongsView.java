@@ -5,4 +5,5 @@ package com.tressler.travistressler.lyricsfurb.AllSongsView;
  */
 
 public interface AllSongsView {
+    void launchAddSongFragment();
 }

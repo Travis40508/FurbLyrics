@@ -5,4 +5,19 @@ package com.tressler.travistressler.lyricsfurb.AddSongView;
  */
 
 public interface AddSongView {
+    void showSaveSongButton();
+
+    void hideShowSaveSongButton();
+
+    void showProgressBar();
+
+    void hideProgressBar();
+
+    void showSongNotFoundToast();
+
+    void showSongAddedToast();
+
+    void eraseArtistNameText();
+
+    void eraseSongTitleText();
 }

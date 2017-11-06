@@ -3,6 +3,7 @@ package com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,12 +17,14 @@ public class SongEntity {
 
     private String songTitle;
     private String songArtist;
+    private String songLyrics;
     private List<String> playLists;
 
-    public SongEntity(String songTitle, String songArtist, List<String> playLists) {
+    public SongEntity(String songTitle, String songArtist, String songLyrics) {
         this.songTitle = songTitle;
         this.songArtist = songArtist;
-        this.playLists = playLists;
+        this.songLyrics = songLyrics;
+        this.playLists = new ArrayList<>();
     }
 
     public String getSongTitle() {
@@ -54,5 +57,13 @@ public class SongEntity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getSongLyrics() {
+        return songLyrics;
+    }
+
+    public void setSongLyrics(String songLyrics) {
+        this.songLyrics = songLyrics;
     }
 }

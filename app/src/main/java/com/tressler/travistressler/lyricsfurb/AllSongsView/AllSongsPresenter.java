@@ -17,4 +17,8 @@ public class AllSongsPresenter {
     public void attachView(AllSongsView view) {
         this.view = view;
     }
+
+    public void addSongClicked() {
+        view.launchAddSongFragment();
+    }
 }

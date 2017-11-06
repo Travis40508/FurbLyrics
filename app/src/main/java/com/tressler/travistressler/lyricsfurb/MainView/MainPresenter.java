@@ -24,15 +24,18 @@ public class MainPresenter {
         this.view = view;
         if(this.view != null) {
             view.populateFragmentList();
-//            testLogic();
+            testLogic();
         }
     }
 
-//    private void testLogic() {
-//        lyricsApi.getSong("Cad8a7sd7asd987as9d789asd", "Cad87a9sd7sa87d89as7d").subscribe(song -> {
-//           Log.d("@@@@", song.getLyrics());
-//        }, throwable -> {
-//            Log.d("@@@@", "invalid song...");
-//        });
-//    }
+    private void testLogic() {
+        lyricsApi.getSong("Gentle Waves", "Falling From Grace").subscribe(song -> {
+           Log.d("@@@@", song.getLyrics());
+        }, throwable -> {
+            Log.d("@@@@", "invalid song...");
+        });
+    }
+
+    //TODO make header for all songs list with ADD SONG button which will take user to fragment that will allow them to add a song. Also add Rx support for
+    //TODO Room and make sure database returns flowables
 }

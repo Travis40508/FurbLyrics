@@ -7,12 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tressler.travistressler.lyricsfurb.AddSongView.AddSongFragment;
 import com.tressler.travistressler.lyricsfurb.Application.di.LyricsApplication;
 import com.tressler.travistressler.lyricsfurb.R;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by travistressler on 11/2/17.
@@ -21,6 +24,11 @@ import butterknife.ButterKnife;
 public class AllSongsFragment extends Fragment implements AllSongsView {
 
     @Inject protected AllSongsPresenter presenter;
+
+    @OnClick(R.id.button_add_song)
+    protected void addSongButton(View view) {
+        presenter.addSongClicked();
+    }
 
     @Nullable
     @Override
@@ -44,5 +52,10 @@ public class AllSongsFragment extends Fragment implements AllSongsView {
         AllSongsFragment fragment = new AllSongsFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void launchAddSongFragment() {
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder, AddSongFragment.newInstance()).commit();
     }
 }

@@ -13,6 +13,7 @@ import android.arch.persistence.room.TypeConverters;
 
 public abstract class SongDatabaseImpl extends RoomDatabase implements SongDatabase{
 
+    @Override
     public abstract SongDao songDao();
 
     public abstract PlaylistDao playlistDao();
