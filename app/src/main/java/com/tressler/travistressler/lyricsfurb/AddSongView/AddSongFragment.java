@@ -136,22 +136,27 @@ public class AddSongFragment extends Fragment implements AddSongView {
     @Override
     public void loadSpinner(List<PlaylistEntity> playlistEntities) {
         List<String> playLists = new ArrayList<>();
-        for(PlaylistEntity playList : playlistEntities) {
+        playLists.add("No Playlist");
+        for (PlaylistEntity playList : playlistEntities) {
             playLists.add(playList.getPlayListName());
         }
-        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, playLists);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        playListSpinner.setAdapter(adapter);
-        playListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
-                presenter.playListSelected((String) adapterView.getItemAtPosition(pos));
-            }
+        if (getContext() != null) {
+            adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, playLists);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            playListSpinner.setAdapter(adapter);
 
-            }
-        });
+            playListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                    presenter.playListSelected((String) adapterView.getItemAtPosition(pos));
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        }
     }
 }

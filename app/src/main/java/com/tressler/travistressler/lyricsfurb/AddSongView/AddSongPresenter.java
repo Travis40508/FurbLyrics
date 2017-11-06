@@ -82,7 +82,7 @@ public class AddSongPresenter {
                 @Override
                 public void run() {
                     List<String> playLists = new ArrayList<>();
-                    if(playListSelected != null) {
+                    if(playListSelected != null && !playListSelected.equalsIgnoreCase("No Playlist")) {
                         playLists.add(playListSelected);
                     }
                     SongEntity newSong = new SongEntity(songTitle, artistName, song.getLyrics(), playLists);
