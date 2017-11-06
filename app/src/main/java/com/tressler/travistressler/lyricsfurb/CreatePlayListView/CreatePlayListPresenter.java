@@ -22,6 +22,7 @@ public class CreatePlayListPresenter {
     private final Scheduler workerThread;
     private CreatePlayListView view;
     private List<SongEntity> songsToBeSaved;
+    private String playListName;
 
     @Inject
     public CreatePlayListPresenter(SongDatabase songDatabase, Scheduler workerThread) {
@@ -61,21 +62,38 @@ public class CreatePlayListPresenter {
         }
     }
 
-    public void chosenSongListCellClicked(SongEntity songEntity, int itemCount) {
+    public void chosenSongListCellClicked(SongEntity songEntity) {
         songsToBeSaved.remove(songEntity);
-        if(itemCount > 0) {
+        if(songsToBeSaved.size() > 0) {
             view.showSavePlaylistButton();
         } else {
             view.hideSavePlaylistButton();
         }
     }
 
-    public void allSongListCellClicked(SongEntity songEntity, int itemCount) {
+    public void allSongListCellClicked(SongEntity songEntity) {
         songsToBeSaved.add(songEntity);
-        if(itemCount > 0) {
+        if(songsToBeSaved.size() > 0) {
             view.showSavePlaylistButton();
         } else {
             view.hideSavePlaylistButton();
         }
+    }
+
+    public void savePlayListButtonClicked() {
+        for(SongEntity song : songsToBeSaved) {
+            workerThread.createWorker().schedule(new Runnable() {
+                @Override
+                public void run() {
+                    song.addToPlayLists(playListName);
+                    songDatabase.songDao().updateSongEntity(song);
+                    view.detachFragment();
+                }
+            });
+        }
+    }
+
+    public void playListNameTextChanged(CharSequence playListName) {
+        this.playListName = playListName.toString();
     }
 }

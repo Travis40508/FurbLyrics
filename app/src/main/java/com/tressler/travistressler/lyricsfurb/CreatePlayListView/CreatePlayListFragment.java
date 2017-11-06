@@ -23,6 +23,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 /**
  * Created by travistressler on 11/2/17.
@@ -40,6 +42,16 @@ public class CreatePlayListFragment extends Fragment implements CreatePlayListVi
 
     @BindView(R.id.button_save_play_list)
     protected Button savePlayListButton;
+
+    @OnClick(R.id.button_save_play_list)
+    protected void onSavePlayListButtonClicked(View view) {
+        presenter.savePlayListButtonClicked();
+    }
+
+    @OnTextChanged(R.id.input_play_list_name)
+    protected void onPlayListNameTextChanged(CharSequence playListName) {
+        presenter.playListNameTextChanged(playListName);
+    }
 
     private SongListAdapter allSongsAdapter;
     private SongListAdapter chosenSongsAdapter;
@@ -103,16 +115,23 @@ public class CreatePlayListFragment extends Fragment implements CreatePlayListVi
         savePlayListButton.setVisibility(View.GONE);
     }
 
+    @Override
+    public void detachFragment() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .remove(getActivity().getSupportFragmentManager()
+                        .findFragmentById(R.id.fragment_holder_playlists)).commit();
+    }
+
 
     @Override
     public void onChosenSongCellClicked(SongEntity songEntity) {
-        presenter.chosenSongListCellClicked(songEntity, chosenSongsAdapter.getItemCount());
+        presenter.chosenSongListCellClicked(songEntity);
         allSongsAdapter.addSong(songEntity);
     }
 
     @Override
     public void onAllSongCellClicked(SongEntity songEntity) {
-        presenter.allSongListCellClicked(songEntity, chosenSongsAdapter.getItemCount());
+        presenter.allSongListCellClicked(songEntity);
         chosenSongsAdapter.addSong(songEntity);
     }
 }

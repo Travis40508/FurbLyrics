@@ -16,4 +16,6 @@ public interface CreatePlayListView {
     void showSavePlaylistButton();
 
     void hideSavePlaylistButton();
+
+    void detachFragment();
 }

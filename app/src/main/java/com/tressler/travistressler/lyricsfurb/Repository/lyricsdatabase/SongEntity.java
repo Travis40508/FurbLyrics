@@ -66,4 +66,8 @@ public class SongEntity {
     public void setSongLyrics(String songLyrics) {
         this.songLyrics = songLyrics;
     }
+
+    public void addToPlayLists(String playList) {
+        playLists.add(playList);
+    }
 }
