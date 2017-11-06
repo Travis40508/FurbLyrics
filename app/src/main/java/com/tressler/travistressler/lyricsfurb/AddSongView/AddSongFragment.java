@@ -6,13 +6,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.tressler.travistressler.lyricsfurb.Application.di.LyricsApplication;
 import com.tressler.travistressler.lyricsfurb.R;
+import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.PlaylistEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -27,6 +34,9 @@ import butterknife.OnTextChanged;
 
 public class AddSongFragment extends Fragment implements AddSongView {
 
+    @BindView(R.id.spinner_play_lists)
+    protected Spinner playListSpinner;
+
     @BindView(R.id.button_save_song)
     protected Button saveSongButton;
 
@@ -38,6 +48,8 @@ public class AddSongFragment extends Fragment implements AddSongView {
 
     @BindView(R.id.input_artist_name)
     protected EditText artistNameInput;
+
+    private ArrayAdapter<String> adapter;
 
     @Inject protected AddSongPresenter presenter;
 
@@ -119,5 +131,27 @@ public class AddSongFragment extends Fragment implements AddSongView {
     @Override
     public void eraseSongTitleText() {
         songTitleInput.setText("");
+    }
+
+    @Override
+    public void loadSpinner(List<PlaylistEntity> playlistEntities) {
+        List<String> playLists = new ArrayList<>();
+        for(PlaylistEntity playList : playlistEntities) {
+            playLists.add(playList.getPlayListName());
+        }
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, playLists);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        playListSpinner.setAdapter(adapter);
+        playListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                presenter.playListSelected((String) adapterView.getItemAtPosition(pos));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 }

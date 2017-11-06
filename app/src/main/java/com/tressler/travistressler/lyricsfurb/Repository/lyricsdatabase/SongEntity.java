@@ -20,11 +20,11 @@ public class SongEntity {
     private String songLyrics;
     private List<String> playLists;
 
-    public SongEntity(String songTitle, String songArtist, String songLyrics) {
+    public SongEntity(String songTitle, String songArtist, String songLyrics, List<String> playLists) {
         this.songTitle = songTitle;
         this.songArtist = songArtist;
         this.songLyrics = songLyrics;
-        this.playLists = new ArrayList<>();
+        this.playLists = playLists;
     }
 
     public String getSongTitle() {

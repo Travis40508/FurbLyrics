@@ -111,7 +111,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
                         songList.remove(songEntity);
                         callback.onChosenSongCellClicked(songEntity);
                     } else if (source.equalsIgnoreCase("allSongsList")) {
-
+                        Log.d("@@@@", songEntity.getPlayLists().get(0));
                     }
                     notifyDataSetChanged();
                 }

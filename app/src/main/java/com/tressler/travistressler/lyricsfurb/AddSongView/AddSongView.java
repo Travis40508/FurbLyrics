@@ -1,5 +1,9 @@
 package com.tressler.travistressler.lyricsfurb.AddSongView;
 
+import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.PlaylistEntity;
+
+import java.util.List;
+
 /**
  * Created by travistressler on 11/2/17.
  */
@@ -20,4 +24,6 @@ public interface AddSongView {
     void eraseArtistNameText();
 
     void eraseSongTitleText();
+
+    void loadSpinner(List<PlaylistEntity> playlistEntities);
 }
