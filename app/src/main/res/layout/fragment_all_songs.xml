@@ -15,6 +15,7 @@
         android:layout_height="?android:attr/actionBarSize">
 
         <Button
+            android:layout_margin="5dp"
             android:id="@+id/button_add_song"
             android:background="@android:color/transparent"
             android:textStyle="bold"

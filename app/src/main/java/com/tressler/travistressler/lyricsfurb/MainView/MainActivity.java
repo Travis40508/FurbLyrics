@@ -51,4 +51,29 @@ public class MainActivity extends AppCompatActivity implements MainView {
         fragmentList.add(PlayListsFragment.newInstance());
         fragmentList.add(AllSongsFragment.newInstance());
     }
+
+    @Override
+    public void closeApp() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public void removeFragment() {
+        getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.fragment_holder)).commit();
+    }
+
+    @Override
+    public void removeCreatePlayListFragment() {
+        getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlists)).commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        presenter.onBackPressed(getSupportFragmentManager().findFragmentById(R.id.fragment_holder) == null,
+                getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlists) == null);
+    }
+
+    public void transitionToAllSongsFragment() {
+        viewPager.setCurrentItem(1);
+    }
 }

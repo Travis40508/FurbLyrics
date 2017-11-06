@@ -6,4 +6,10 @@ package com.tressler.travistressler.lyricsfurb.MainView;
 
 public interface MainView {
     void populateFragmentList();
+
+    void closeApp();
+
+    void removeFragment();
+
+    void removeCreatePlayListFragment();
 }

@@ -36,6 +36,18 @@ public class MainPresenter {
         });
     }
 
+    public void onBackPressed(boolean fragmentIsNull, boolean createPlaylistFragmentIsNull) {
+        if(fragmentIsNull && createPlaylistFragmentIsNull) {
+            view.closeApp();
+        } else if (!fragmentIsNull){
+            view.removeFragment();
+        } else if (!createPlaylistFragmentIsNull) {
+            view.removeCreatePlayListFragment();
+        } else {
+            view.closeApp();
+        }
+    }
+
     //TODO make header for all songs list with ADD SONG button which will take user to fragment that will allow them to add a song. Also add Rx support for
     //TODO Room and make sure database returns flowables
 }

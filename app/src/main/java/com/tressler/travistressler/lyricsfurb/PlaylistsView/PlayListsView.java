@@ -5,4 +5,9 @@ package com.tressler.travistressler.lyricsfurb.PlaylistsView;
  */
 
 public interface PlayListsView {
+    void launchPlaylistCreator();
+
+    void takeUserToAllSongsFragment();
+
+    void toastInstructions();
 }

@@ -14,6 +14,7 @@
         android:layout_height="?android:actionBarSize">
 
         <Button
+            android:layout_margin="5dp"
             android:visibility="gone"
             android:id="@+id/button_save_song"
             android:background="@android:color/transparent"
