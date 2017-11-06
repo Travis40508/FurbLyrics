@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.tressler.travistressler.lyricsfurb.Application.di.LyricsApplication;
 import com.tressler.travistressler.lyricsfurb.R;
@@ -20,6 +22,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by travistressler on 11/2/17.
@@ -27,21 +30,40 @@ import butterknife.ButterKnife;
 
 public class PlayListFragment extends Fragment implements PlayListView, SongListAdapter.Callback {
 
-    @Inject protected PlayListPresenter presenter;
+    @Inject
+    protected PlayListPresenter presenter;
 
     private SongListAdapter adapter;
 
     @BindView(R.id.recycler_view_playlist)
     protected RecyclerView recyclerViewPlaylist;
 
+    @BindView(R.id.button_done)
+    protected Button doneButton;
+
+    @BindView(R.id.button_cancel)
+    protected Button cancelButton;
+
+    @OnClick(R.id.button_cancel)
+    protected void onCancelButtonClicked(View view) {
+        presenter.cancelClicked();
+    }
+
+    @OnClick(R.id.button_done)
+    protected void onDoneButtonClicked(View view) {
+        presenter.doneClicked(adapter.getSongList());
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_play_list, container, false);
         ButterKnife.bind(this, view);
-        ((LyricsApplication)getActivity().getApplication()).getComponent().inject(this);
+        ((LyricsApplication) getActivity().getApplication()).getComponent().inject(this);
         List<String> songsInPlaylist = getArguments().getStringArrayList("SONGS");
+        String playListName = getArguments().getString("PLAYLIST");
         presenter.songsRetrieved(songsInPlaylist);
+        presenter.playListTitleRetrieved(playListName);
         return view;
     }
 
@@ -70,6 +92,37 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
     }
 
     @Override
+    public void showDoneButton() {
+        doneButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showCancelButton() {
+        cancelButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideCancelButton() {
+        cancelButton.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideDoneButton() {
+        doneButton.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideExtraOptions() {
+        adapter.hideExtraOptions();
+    }
+
+    @Override
+    public void showSuccessToast() {
+        Toast.makeText(getContext(), "List Successfully Updated!", Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
     public void onChosenSongCellClicked(SongEntity songEntity) {
 
     }
@@ -77,5 +130,10 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
     @Override
     public void onAllSongCellClicked(SongEntity songEntity) {
 
+    }
+
+    @Override
+    public void onCellLongClicked() {
+        presenter.cellLongClicked();
     }
 }

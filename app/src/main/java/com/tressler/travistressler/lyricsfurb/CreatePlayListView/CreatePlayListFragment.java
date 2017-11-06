@@ -134,4 +134,9 @@ public class CreatePlayListFragment extends Fragment implements CreatePlayListVi
         presenter.allSongListCellClicked(songEntity);
         chosenSongsAdapter.addSong(songEntity);
     }
+
+    @Override
+    public void onCellLongClicked() {
+
+    }
 }

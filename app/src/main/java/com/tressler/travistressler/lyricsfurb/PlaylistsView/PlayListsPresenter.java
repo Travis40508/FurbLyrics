@@ -2,6 +2,7 @@ package com.tressler.travistressler.lyricsfurb.PlaylistsView;
 
 import android.os.Bundle;
 
+import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.PlaylistEntity;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongDatabase;
 
 import java.util.ArrayList;
@@ -77,9 +78,12 @@ public class PlayListsPresenter {
         }
     }
 
-    public void playListClicked(ArrayList<String> songsInPlaylist) {
+    public void playListClicked(PlaylistEntity playlistEntity) {
+        List<String> songsInPlaylist = new ArrayList<>();
+        songsInPlaylist = playlistEntity.getSongsInPlaylist();
         Bundle bundle = new Bundle();
-        bundle.putStringArrayList("SONGS", songsInPlaylist);
+        bundle.putStringArrayList("SONGS", (ArrayList<String>) songsInPlaylist);
+        bundle.putString("PLAYLIST", playlistEntity.getPlayListName());
         view.launchPlaylistFragment(bundle);
     }
 }

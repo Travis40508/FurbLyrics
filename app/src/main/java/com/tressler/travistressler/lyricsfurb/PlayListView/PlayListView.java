@@ -10,4 +10,16 @@ import java.util.List;
 
 public interface PlayListView {
     void showPlaylistSongs(List<SongEntity> playlistSongs);
+
+    void showDoneButton();
+
+    void showCancelButton();
+
+    void hideCancelButton();
+
+    void hideDoneButton();
+
+    void hideExtraOptions();
+
+    void showSuccessToast();
 }

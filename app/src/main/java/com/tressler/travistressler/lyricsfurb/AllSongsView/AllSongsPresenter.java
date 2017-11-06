@@ -50,4 +50,13 @@ public class AllSongsPresenter {
     public void addSongClicked() {
         view.launchAddSongFragment();
     }
+
+    public void cellLongClicked() {
+        view.showCancelButton();
+    }
+
+    public void cancelButtonClicked() {
+        view.hideCancelButton();
+        view.hideDeleteIconInList();
+    }
 }

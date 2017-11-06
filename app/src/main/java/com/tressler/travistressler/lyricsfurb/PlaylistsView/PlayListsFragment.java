@@ -107,6 +107,6 @@ public class PlayListsFragment extends Fragment implements PlayListsView, Playli
 
     @Override
     public void onPlaylistClicked(PlaylistEntity playlistEntity) {
-        presenter.playListClicked((ArrayList<String>) playlistEntity.getSongsInPlaylist());
+        presenter.playListClicked(playlistEntity);
     }
 }

@@ -2,6 +2,7 @@ package com.tressler.travistressler.lyricsfurb.PlayListView;
 
 import android.util.Log;
 
+import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.PlaylistEntity;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongDatabase;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
 
@@ -24,6 +25,7 @@ public class PlayListPresenter {
     private final Scheduler workerThread;
     private PlayListView view;
     private List<SongEntity> playlistSongs;
+    private String playListName;
 
     @Inject
     public PlayListPresenter(SongDatabase songDatabase, Scheduler workerThread) {
@@ -51,5 +53,39 @@ public class PlayListPresenter {
                 view.showPlaylistSongs(songList);
             }
         });
+    }
+
+    public void cellLongClicked() {
+        view.showDoneButton();
+        view.showCancelButton();
+    }
+
+    public void cancelClicked() {
+        view.hideCancelButton();
+        view.hideDoneButton();
+        view.hideExtraOptions();
+    }
+
+    public void doneClicked(List<SongEntity> songList) {
+        workerThread.createWorker().schedule(new Runnable() {
+            @Override
+            public void run() {
+                List<String> songTitles = new ArrayList<>();
+                PlaylistEntity playlistEntity = songDatabase.playlistDao().getChosenPlaylist(playListName);
+                for(SongEntity song : songList) {
+                    songTitles.add(song.getSongTitle());
+                }
+                playlistEntity.setSongsInPlaylist(songTitles);
+                songDatabase.playlistDao().updatePlaylist(playlistEntity);
+            }
+        });
+        view.hideCancelButton();
+        view.hideDoneButton();
+        view.showSuccessToast();
+        view.hideExtraOptions();
+    }
+
+    public void playListTitleRetrieved(String playListName) {
+        this.playListName = playListName;
     }
 }

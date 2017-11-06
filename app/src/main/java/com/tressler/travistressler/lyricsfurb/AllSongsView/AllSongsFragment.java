@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -34,6 +35,9 @@ public class AllSongsFragment extends Fragment implements AllSongsView, SongList
     @BindView(R.id.recycler_view_songs)
     protected RecyclerView recyclerView;
 
+    @BindView(R.id.button_cancel)
+    protected Button cancelButton;
+
     private SongListAdapter adapter;
 
     @Inject protected AllSongsPresenter presenter;
@@ -41,6 +45,11 @@ public class AllSongsFragment extends Fragment implements AllSongsView, SongList
     @OnClick(R.id.button_add_song)
     protected void addSongButton(View view) {
         presenter.addSongClicked();
+    }
+
+    @OnClick(R.id.button_cancel)
+    protected void onCancelButtonClicked(View view) {
+        presenter.cancelButtonClicked();
     }
 
     @Nullable
@@ -93,6 +102,21 @@ public class AllSongsFragment extends Fragment implements AllSongsView, SongList
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void showCancelButton() {
+        cancelButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideCancelButton() {
+        cancelButton.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideDeleteIconInList() {
+        adapter.hideExtraOptions();
+    }
+
 
     @Override
     public void onChosenSongCellClicked(SongEntity songEntity) {
@@ -102,5 +126,10 @@ public class AllSongsFragment extends Fragment implements AllSongsView, SongList
     @Override
     public void onAllSongCellClicked(SongEntity songEntity) {
 
+    }
+
+    @Override
+    public void onCellLongClicked() {
+        presenter.cellLongClicked();
     }
 }

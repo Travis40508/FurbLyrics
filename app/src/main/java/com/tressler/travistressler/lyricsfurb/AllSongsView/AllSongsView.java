@@ -15,4 +15,10 @@ public interface AllSongsView {
     void showErrorLoadingToast();
 
     void showListOfSongs(List<SongEntity> songEntities);
+
+    void showCancelButton();
+
+    void hideCancelButton();
+
+    void hideDeleteIconInList();
 }

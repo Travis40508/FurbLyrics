@@ -84,6 +84,14 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
         notifyDataSetChanged();
     }
 
+    public void hideExtraOptions() {
+        for(SongEntity song : songList) {
+            song.setDeletingEnabled(false);
+            song.setEditingEnabled(false);
+            notifyDataSetChanged();
+        }
+    }
+
     public class SongViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.item_artist_name)
@@ -116,10 +124,15 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
             if(songEntity.isEditingEnabled()) {
                 upArrow.setVisibility(View.VISIBLE);
                 downArrow.setVisibility(View.VISIBLE);
-                deleteButton.setVisibility(View.VISIBLE);
+
             } else {
                 upArrow.setVisibility(View.GONE);
                 downArrow.setVisibility(View.GONE);
+            }
+
+            if(songEntity.isDeletingEnabled()) {
+                deleteButton.setVisibility(View.VISIBLE);
+            } else {
                 deleteButton.setVisibility(View.GONE);
             }
         }
@@ -149,9 +162,16 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
                     if(source.equalsIgnoreCase("playlist")) {
                         for(SongEntity song : songList) {
                             song.setEditingEnabled(true);
+                            song.setDeletingEnabled(true);
+                            notifyDataSetChanged();
+                        }
+                    } else if (source.equalsIgnoreCase("allSongsList")) {
+                        for(SongEntity song : songList) {
+                            song.setDeletingEnabled(true);
                             notifyDataSetChanged();
                         }
                     }
+                    callback.onCellLongClicked();
                     return false;
                 }
             };
@@ -186,8 +206,13 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
         }
     }
 
+    public List<SongEntity> getSongList() {
+        return songList;
+    }
+
     public interface Callback {
         void onChosenSongCellClicked(SongEntity songEntity);
         void onAllSongCellClicked(SongEntity songEntity);
+        void onCellLongClicked();
     }
 }
