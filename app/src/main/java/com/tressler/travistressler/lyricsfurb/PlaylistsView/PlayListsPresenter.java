@@ -28,8 +28,25 @@ public class PlayListsPresenter {
     public void attachView(PlayListsView view) {
         this.view = view;
         if(view != null) {
+            retrievePlaylists();
             listenForSongListChanges();
         }
+    }
+
+    private void retrievePlaylists() {
+        workerThread.createWorker().schedule(new Runnable() {
+            @Override
+            public void run() {
+                songDatabase.playlistDao().getPlaylists()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(playlistEntities -> {
+                            view.showPlaylists(playlistEntities);
+                        }, throwable -> {
+                            view.showErrorLoadingListToast();
+                        });
+            }
+        });
     }
 
     private void listenForSongListChanges() {

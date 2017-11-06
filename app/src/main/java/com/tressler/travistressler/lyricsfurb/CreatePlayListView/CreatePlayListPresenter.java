@@ -1,5 +1,6 @@
 package com.tressler.travistressler.lyricsfurb.CreatePlayListView;
 
+import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.PlaylistEntity;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongDatabase;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
 
@@ -33,7 +34,7 @@ public class CreatePlayListPresenter {
 
     public void attachView(CreatePlayListView view) {
         this.view = view;
-        if(view != null) {
+        if (view != null) {
             retrieveAllSongs();
             view.setupChosenSongs();
         }
@@ -55,7 +56,7 @@ public class CreatePlayListPresenter {
 
     public void cellClicked(SongEntity songEntity, int itemCount) {
         songsToBeSaved.add(songEntity);
-        if(itemCount > 0) {
+        if (itemCount > 0) {
             view.showSavePlaylistButton();
         } else {
             view.hideSavePlaylistButton();
@@ -64,7 +65,7 @@ public class CreatePlayListPresenter {
 
     public void chosenSongListCellClicked(SongEntity songEntity) {
         songsToBeSaved.remove(songEntity);
-        if(songsToBeSaved.size() > 0) {
+        if (songsToBeSaved.size() > 0) {
             view.showSavePlaylistButton();
         } else {
             view.hideSavePlaylistButton();
@@ -73,7 +74,7 @@ public class CreatePlayListPresenter {
 
     public void allSongListCellClicked(SongEntity songEntity) {
         songsToBeSaved.add(songEntity);
-        if(songsToBeSaved.size() > 0) {
+        if (songsToBeSaved.size() > 0) {
             view.showSavePlaylistButton();
         } else {
             view.hideSavePlaylistButton();
@@ -81,16 +82,17 @@ public class CreatePlayListPresenter {
     }
 
     public void savePlayListButtonClicked() {
-        for(SongEntity song : songsToBeSaved) {
-            workerThread.createWorker().schedule(new Runnable() {
-                @Override
-                public void run() {
+        workerThread.createWorker().schedule(new Runnable() {
+            @Override
+            public void run() {
+                for (SongEntity song : songsToBeSaved) {
                     song.addToPlayLists(playListName);
                     songDatabase.songDao().updateSongEntity(song);
-                    view.detachFragment();
                 }
-            });
-        }
+                songDatabase.playlistDao().insertPlaylist(new PlaylistEntity(playListName));
+                view.detachFragment();
+            }
+        });
     }
 
     public void playListNameTextChanged(CharSequence playListName) {

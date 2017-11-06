@@ -3,6 +3,8 @@ package com.tressler.travistressler.lyricsfurb.PlaylistsView;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +14,14 @@ import com.tressler.travistressler.lyricsfurb.Application.di.LyricsApplication;
 import com.tressler.travistressler.lyricsfurb.CreatePlayListView.CreatePlayListFragment;
 import com.tressler.travistressler.lyricsfurb.MainView.MainActivity;
 import com.tressler.travistressler.lyricsfurb.R;
+import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.PlaylistEntity;
+import com.tressler.travistressler.lyricsfurb.Util.PlaylistsAdapter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -26,10 +33,15 @@ public class PlayListsFragment extends Fragment implements PlayListsView {
 
     @Inject protected PlayListsPresenter presenter;
 
+    @BindView(R.id.recycler_view_play_lists)
+    protected RecyclerView recyclerViewPlaylists;
+
     @OnClick(R.id.button_create_play_list)
     protected void onCreatePlayListClicked(View view) {
         presenter.createPlayListClicked();
     }
+
+    private PlaylistsAdapter adapter;
 
     @Nullable
     @Override
@@ -68,5 +80,19 @@ public class PlayListsFragment extends Fragment implements PlayListsView {
     @Override
     public void toastInstructions() {
         Toast.makeText(getContext(), "Please Add a Song First!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showPlaylists(List<PlaylistEntity> playlistEntities) {
+        adapter = new PlaylistsAdapter(playlistEntities);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerViewPlaylists.setAdapter(adapter);
+        recyclerViewPlaylists.setLayoutManager(linearLayoutManager);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showErrorLoadingListToast() {
+        Toast.makeText(getContext(), "Error Loading Playlists", Toast.LENGTH_SHORT).show();
     }
 }

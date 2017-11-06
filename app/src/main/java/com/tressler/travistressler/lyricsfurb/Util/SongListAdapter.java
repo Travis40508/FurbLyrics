@@ -64,13 +64,17 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
     }
 
     public void addSong(SongEntity songEntity) {
-        songList.add(songEntity);
-        Collections.sort(songList, new Comparator<SongEntity>() {
-            @Override
-            public int compare(SongEntity songEntity, SongEntity t1) {
-                return songEntity.getSongTitle().compareTo(t1.getSongTitle());
-            }
-        });
+        if(source.equalsIgnoreCase("allSongsCreatePlaylist")) {
+            songList.add(songEntity);
+            Collections.sort(songList, new Comparator<SongEntity>() {
+                @Override
+                public int compare(SongEntity songEntity, SongEntity t1) {
+                    return songEntity.getSongTitle().compareTo(t1.getSongTitle());
+                }
+            });
+        } else if (source.equalsIgnoreCase("chosenSongsCreatePlaylist")) {
+            songList.add(songEntity);
+        }
         notifyDataSetChanged();
     }
 

@@ -16,5 +16,6 @@ public abstract class SongDatabaseImpl extends RoomDatabase implements SongDatab
     @Override
     public abstract SongDao songDao();
 
+    @Override
     public abstract PlaylistDao playlistDao();
 }
