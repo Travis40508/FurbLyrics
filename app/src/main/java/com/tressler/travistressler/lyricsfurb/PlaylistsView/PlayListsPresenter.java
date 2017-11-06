@@ -1,5 +1,7 @@
 package com.tressler.travistressler.lyricsfurb.PlaylistsView;
 
+import android.os.Bundle;
+
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongDatabase;
 
 import javax.inject.Inject;
@@ -70,5 +72,11 @@ public class PlayListsPresenter {
             view.takeUserToAllSongsFragment();
             view.toastInstructions();
         }
+    }
+
+    public void playListClicked(String playListName) {
+        Bundle bundle = new Bundle();
+        bundle.putString("PLAYLIST_NAME", playListName);
+        view.launchPlaylistFragment(bundle);
     }
 }

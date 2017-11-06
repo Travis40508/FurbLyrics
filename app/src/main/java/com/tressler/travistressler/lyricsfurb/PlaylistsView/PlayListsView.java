@@ -1,5 +1,7 @@
 package com.tressler.travistressler.lyricsfurb.PlaylistsView;
 
+import android.os.Bundle;
+
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.PlaylistEntity;
 
 import java.util.List;
@@ -18,4 +20,6 @@ public interface PlayListsView {
     void showPlaylists(List<PlaylistEntity> playlistEntities);
 
     void showErrorLoadingListToast();
+
+    void launchPlaylistFragment(Bundle bundle);
 }

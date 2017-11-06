@@ -1,5 +1,6 @@
 package com.tressler.travistressler.lyricsfurb.Util;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +21,12 @@ import butterknife.ButterKnife;
 
 public class PlaylistsAdapter extends RecyclerView.Adapter<PlaylistsAdapter.PlaylistViewHolder> {
 
+    private final Callback callback;
     private List<PlaylistEntity> playListsList;
 
-    public PlaylistsAdapter(List<PlaylistEntity> playListsList) {
+    public PlaylistsAdapter(List<PlaylistEntity> playListsList, Callback callback) {
         this.playListsList = playListsList;
+        this.callback = callback;
     }
 
     @Override
@@ -35,6 +38,7 @@ public class PlaylistsAdapter extends RecyclerView.Adapter<PlaylistsAdapter.Play
     @Override
     public void onBindViewHolder(PlaylistViewHolder holder, int position) {
         holder.onBind(playListsList.get(position));
+        holder.cardView.setOnClickListener(holder.onCellClicked(playListsList.get(position)));
     }
 
     @Override
@@ -47,6 +51,9 @@ public class PlaylistsAdapter extends RecyclerView.Adapter<PlaylistsAdapter.Play
         @BindView(R.id.item_play_list_title)
         protected TextView playListTitle;
 
+        @BindView(R.id.card_view)
+        protected CardView cardView;
+
 
         public PlaylistViewHolder(View itemView) {
             super(itemView);
@@ -56,5 +63,17 @@ public class PlaylistsAdapter extends RecyclerView.Adapter<PlaylistsAdapter.Play
         public void onBind(PlaylistEntity playlistEntity) {
             playListTitle.setText(playlistEntity.getPlayListName());
         }
+
+        public View.OnClickListener onCellClicked(PlaylistEntity playlistEntity) {
+            return new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    callback.onPlaylistClicked(playlistEntity);
+                }
+            };
+        }
+    }
+    public interface Callback {
+        void onPlaylistClicked(PlaylistEntity playlistEntity);
     }
 }

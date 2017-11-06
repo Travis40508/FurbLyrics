@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.tressler.travistressler.lyricsfurb.Application.di.LyricsApplication;
 import com.tressler.travistressler.lyricsfurb.CreatePlayListView.CreatePlayListFragment;
 import com.tressler.travistressler.lyricsfurb.MainView.MainActivity;
+import com.tressler.travistressler.lyricsfurb.PlayListView.PlayListFragment;
 import com.tressler.travistressler.lyricsfurb.R;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.PlaylistEntity;
 import com.tressler.travistressler.lyricsfurb.Util.PlaylistsAdapter;
@@ -29,7 +30,7 @@ import butterknife.OnClick;
  * Created by travistressler on 11/2/17.
  */
 
-public class PlayListsFragment extends Fragment implements PlayListsView {
+public class PlayListsFragment extends Fragment implements PlayListsView, PlaylistsAdapter.Callback {
 
     @Inject protected PlayListsPresenter presenter;
 
@@ -84,7 +85,7 @@ public class PlayListsFragment extends Fragment implements PlayListsView {
 
     @Override
     public void showPlaylists(List<PlaylistEntity> playlistEntities) {
-        adapter = new PlaylistsAdapter(playlistEntities);
+        adapter = new PlaylistsAdapter(playlistEntities, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerViewPlaylists.setAdapter(adapter);
         recyclerViewPlaylists.setLayoutManager(linearLayoutManager);
@@ -94,5 +95,17 @@ public class PlayListsFragment extends Fragment implements PlayListsView {
     @Override
     public void showErrorLoadingListToast() {
         Toast.makeText(getContext(), "Error Loading Playlists", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void launchPlaylistFragment(Bundle bundle) {
+        PlayListFragment playListFragment = PlayListFragment.newInstance();
+        playListFragment.setArguments(bundle);
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder_playlists, playListFragment).commit();
+    }
+
+    @Override
+    public void onPlaylistClicked(PlaylistEntity playlistEntity) {
+        presenter.playListClicked(playlistEntity.getPlayListName());
     }
 }
