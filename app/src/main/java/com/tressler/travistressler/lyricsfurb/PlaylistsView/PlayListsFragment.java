@@ -18,6 +18,7 @@ import com.tressler.travistressler.lyricsfurb.R;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.PlaylistEntity;
 import com.tressler.travistressler.lyricsfurb.Util.PlaylistsAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -106,6 +107,6 @@ public class PlayListsFragment extends Fragment implements PlayListsView, Playli
 
     @Override
     public void onPlaylistClicked(PlaylistEntity playlistEntity) {
-        presenter.playListClicked(playlistEntity.getPlayListName());
+        presenter.playListClicked((ArrayList<String>) playlistEntity.getSongsInPlaylist());
     }
 }

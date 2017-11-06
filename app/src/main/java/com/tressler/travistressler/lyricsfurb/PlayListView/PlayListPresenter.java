@@ -39,21 +39,16 @@ public class PlayListPresenter {
         }
     }
 
-    public void playListNameRetrieved(String playlistName) {
+    public void songsRetrieved(List<String> songsInPlaylist) {
+        List<SongEntity> songList = new ArrayList<>();
         workerThread.createWorker().schedule(new Runnable() {
             @Override
             public void run() {
-                songDatabase.songDao().getSongs()
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(songEntities -> {
-                            for(SongEntity song : songEntities) {
-                                if(song.getPlayLists().contains(playlistName)) {
-                                    playlistSongs.add(song);
-                                }
-                            }
-                            view.showPlaylistSongs(playlistSongs);
-                        });
+                for(String item : songsInPlaylist) {
+                    SongEntity songEntity = songDatabase.songDao().getChosenSong(item);
+                    songList.add(songEntity);
+                }
+                view.showPlaylistSongs(songList);
             }
         });
     }

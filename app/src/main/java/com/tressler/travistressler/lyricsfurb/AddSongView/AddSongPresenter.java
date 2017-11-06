@@ -3,6 +3,7 @@ package com.tressler.travistressler.lyricsfurb.AddSongView;
 import android.util.Log;
 
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsapi.LyricsApi;
+import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.PlaylistEntity;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongDatabase;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
 
@@ -81,12 +82,11 @@ public class AddSongPresenter {
             workerThread.createWorker().schedule(new Runnable() {
                 @Override
                 public void run() {
-                    List<String> playLists = new ArrayList<>();
-                    if(playListSelected != null && !playListSelected.equalsIgnoreCase("No Playlist")) {
-                        playLists.add(playListSelected);
-                    }
-                    SongEntity newSong = new SongEntity(songTitle, artistName, song.getLyrics(), playLists);
+                    PlaylistEntity playlistEntity = songDatabase.playlistDao().getChosenPlaylist(playListSelected);
+                    SongEntity newSong = new SongEntity(songTitle, artistName, song.getLyrics());
                     songDatabase.songDao().insertSongEntity(newSong);
+                    playlistEntity.addToPlaylist(newSong.getSongTitle());
+                    songDatabase.playlistDao().updatePlaylist(playlistEntity);
                 }
             });
             view.hideProgressBar();

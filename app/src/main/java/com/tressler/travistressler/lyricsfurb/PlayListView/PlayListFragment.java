@@ -40,7 +40,8 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
         View view = inflater.inflate(R.layout.fragment_play_list, container, false);
         ButterKnife.bind(this, view);
         ((LyricsApplication)getActivity().getApplication()).getComponent().inject(this);
-        presenter.playListNameRetrieved((String) getArguments().get("PLAYLIST_NAME"));
+        List<String> songsInPlaylist = getArguments().getStringArrayList("SONGS");
+        presenter.songsRetrieved(songsInPlaylist);
         return view;
     }
 

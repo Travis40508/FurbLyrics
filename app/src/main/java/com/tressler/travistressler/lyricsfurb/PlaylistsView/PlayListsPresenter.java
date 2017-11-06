@@ -4,6 +4,9 @@ import android.os.Bundle;
 
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.Scheduler;
@@ -74,9 +77,9 @@ public class PlayListsPresenter {
         }
     }
 
-    public void playListClicked(String playListName) {
+    public void playListClicked(ArrayList<String> songsInPlaylist) {
         Bundle bundle = new Bundle();
-        bundle.putString("PLAYLIST_NAME", playListName);
+        bundle.putStringArrayList("SONGS", songsInPlaylist);
         view.launchPlaylistFragment(bundle);
     }
 }

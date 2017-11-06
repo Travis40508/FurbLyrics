@@ -3,6 +3,7 @@ package com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -23,4 +24,10 @@ public interface PlaylistDao {
 
     @Query("SELECT * FROM PlaylistEntity")
     Flowable<List<PlaylistEntity>> getPlaylists();
+
+    @Query("SELECT * FROM PlaylistEntity WHERE playListName LIKE :name")
+    PlaylistEntity getChosenPlaylist(String name);
+
+    @Update
+    void updatePlaylist(PlaylistEntity playlistEntity);
 }

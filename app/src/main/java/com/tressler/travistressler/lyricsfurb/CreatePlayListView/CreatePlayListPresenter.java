@@ -85,11 +85,11 @@ public class CreatePlayListPresenter {
         workerThread.createWorker().schedule(new Runnable() {
             @Override
             public void run() {
+                List<String> songsInPlaylist = new ArrayList<>();
                 for (SongEntity song : songsToBeSaved) {
-                    song.addToPlayLists(playListName);
-                    songDatabase.songDao().updateSongEntity(song);
+                    songsInPlaylist.add(song.getSongTitle());
                 }
-                songDatabase.playlistDao().insertPlaylist(new PlaylistEntity(playListName));
+                songDatabase.playlistDao().insertPlaylist(new PlaylistEntity(playListName, songsInPlaylist));
                 view.detachFragment();
             }
         });

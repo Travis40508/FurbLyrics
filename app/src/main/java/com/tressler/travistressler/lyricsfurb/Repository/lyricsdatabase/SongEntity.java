@@ -18,13 +18,11 @@ public class SongEntity {
     private String songTitle;
     private String songArtist;
     private String songLyrics;
-    private List<String> playLists;
 
-    public SongEntity(String songTitle, String songArtist, String songLyrics, List<String> playLists) {
+    public SongEntity(String songTitle, String songArtist, String songLyrics) {
         this.songTitle = songTitle;
         this.songArtist = songArtist;
         this.songLyrics = songLyrics;
-        this.playLists = playLists;
     }
 
     public String getSongTitle() {
@@ -43,13 +41,6 @@ public class SongEntity {
         this.songArtist = songArtist;
     }
 
-    public List<String> getPlayLists() {
-        return playLists;
-    }
-
-    public void setPlayLists(List<String> playLists) {
-        this.playLists = playLists;
-    }
 
     public int getId() {
         return id;
@@ -67,7 +58,4 @@ public class SongEntity {
         this.songLyrics = songLyrics;
     }
 
-    public void addToPlayLists(String playList) {
-        playLists.add(playList);
-    }
 }

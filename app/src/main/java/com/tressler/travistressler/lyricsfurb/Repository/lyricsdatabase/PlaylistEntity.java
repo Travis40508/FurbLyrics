@@ -3,6 +3,8 @@ package com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.util.List;
+
 /**
  * Created by travistressler on 11/4/17.
  */
@@ -14,9 +16,11 @@ public class PlaylistEntity {
     private int id;
 
     private String playListName;
+    private List<String> songsInPlaylist;
 
-    public PlaylistEntity(String playListName) {
+    public PlaylistEntity(String playListName, List<String> songsInPlaylist) {
         this.playListName = playListName;
+        this.songsInPlaylist = songsInPlaylist;
     }
 
     public int getId() {
@@ -33,5 +37,17 @@ public class PlaylistEntity {
 
     public void setPlayListName(String playListName) {
         this.playListName = playListName;
+    }
+
+    public List<String> getSongsInPlaylist() {
+        return songsInPlaylist;
+    }
+
+    public void setSongsInPlaylist(List<String> songsInPlaylist) {
+        this.songsInPlaylist = songsInPlaylist;
+    }
+
+    public void addToPlaylist(String songtitle) {
+        songsInPlaylist.add(songtitle);
     }
 }
