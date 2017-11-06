@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tressler.travistressler.lyricsfurb.R;
@@ -54,6 +55,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
     public void onBindViewHolder(SongViewHolder holder, int position) {
         holder.bindView(songList.get(position));
         holder.cardView.setOnClickListener(holder.onCellClicked(songList.get(position)));
+        holder.cardView.setOnLongClickListener(holder.onCellLongClicked(songList.get(position)));
     }
 
     @Override
@@ -91,6 +93,15 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
         @BindView(R.id.card_view)
         protected CardView cardView;
 
+        @BindView(R.id.button_up_arrow)
+        protected ImageView upArrow;
+
+        @BindView(R.id.button_down_arrow)
+        protected ImageView downArrow;
+
+        @BindView(R.id.button_delete)
+        protected ImageView deleteButton;
+
 
         public SongViewHolder(View itemView) {
             super(itemView);
@@ -116,6 +127,20 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
 
                     }
                     notifyDataSetChanged();
+                }
+            };
+        }
+
+        public View.OnLongClickListener onCellLongClicked(SongEntity songEntity) {
+            return new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if(source.equalsIgnoreCase("playlist")) {
+                        upArrow.setVisibility(View.VISIBLE);
+                        downArrow.setVisibility(View.VISIBLE);
+                        deleteButton.setVisibility(View.VISIBLE);
+                    }
+                    return false;
                 }
             };
         }
