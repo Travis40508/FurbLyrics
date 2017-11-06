@@ -3,9 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:clickable="true">
+    android:clickable="true"
+    android:background="#111">
 
     <RelativeLayout
+        android:id="@+id/action_bar"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
         android:background="@android:color/black"
@@ -23,6 +25,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_songs"
+        app:layout_constraintTop_toBottomOf="@id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
 
     <FrameLayout
         android:id="@+id/fragment_holder"
