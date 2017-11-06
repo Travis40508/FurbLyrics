@@ -31,12 +31,14 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
     private List<SongEntity> songList;
 
     public SongListAdapter(List<SongEntity> songList, Callback callback, String source) {
-        Collections.sort(songList, new Comparator<SongEntity>() {
-            @Override
-            public int compare(SongEntity songEntity, SongEntity t1) {
-                return songEntity.getSongTitle().compareTo(t1.getSongTitle());
-            }
-        });
+        if(!source.equalsIgnoreCase("playlist")) {
+            Collections.sort(songList, new Comparator<SongEntity>() {
+                @Override
+                public int compare(SongEntity songEntity, SongEntity t1) {
+                    return songEntity.getSongTitle().compareTo(t1.getSongTitle());
+                }
+            });
+        }
         this.songList = songList;
         this.callback = callback;
         this.source = source;
