@@ -29,7 +29,7 @@ import butterknife.OnClick;
  * Created by travistressler on 11/2/17.
  */
 
-public class AllSongsFragment extends Fragment implements AllSongsView {
+public class AllSongsFragment extends Fragment implements AllSongsView, SongListAdapter.Callback {
 
     @BindView(R.id.recycler_view_songs)
     protected RecyclerView recyclerView;
@@ -86,10 +86,15 @@ public class AllSongsFragment extends Fragment implements AllSongsView {
 
     @Override
     public void showListOfSongs(List<SongEntity> songEntities) {
-        adapter = new SongListAdapter(songEntities);
+        adapter = new SongListAdapter(songEntities, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onCellClicked(SongEntity songEntity) {
+
     }
 }

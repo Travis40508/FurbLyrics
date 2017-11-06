@@ -1,5 +1,6 @@
 package com.tressler.travistressler.lyricsfurb.Util;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import java.util.zip.Inflater;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by travistressler on 11/5/17.
@@ -23,9 +25,10 @@ import butterknife.ButterKnife;
 
 public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongViewHolder> {
 
+    private final Callback callback;
     private List<SongEntity> songList;
 
-    public SongListAdapter(List<SongEntity> songList) {
+    public SongListAdapter(List<SongEntity> songList, Callback callback) {
         Collections.sort(songList, new Comparator<SongEntity>() {
             @Override
             public int compare(SongEntity songEntity, SongEntity t1) {
@@ -33,6 +36,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
             }
         });
         this.songList = songList;
+        this.callback = callback;
     }
 
     @Override
@@ -44,6 +48,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
     @Override
     public void onBindViewHolder(SongViewHolder holder, int position) {
         holder.bindView(songList.get(position));
+        holder.cardView.setOnClickListener(holder.onCellClicked(songList.get(position)));
     }
 
     @Override
@@ -55,6 +60,11 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
         }
     }
 
+    public void addSong(SongEntity songEntity) {
+        songList.add(songEntity);
+        notifyDataSetChanged();
+    }
+
     public class SongViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.item_artist_name)
@@ -62,6 +72,9 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
 
         @BindView(R.id.item_song_title)
         protected TextView songTitle;
+
+        @BindView(R.id.card_view)
+        protected CardView cardView;
 
 
         public SongViewHolder(View itemView) {
@@ -73,5 +86,22 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
             artistName.setText(songEntity.getSongArtist());
             songTitle.setText(songEntity.getSongTitle());
         }
+
+        public View.OnClickListener onCellClicked(SongEntity songEntity) {
+            return new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    songList.remove(songEntity);
+                    callback.onCellClicked(songEntity);
+                    notifyDataSetChanged();
+
+                    //TODO pass in a string into the constructor specifying which view it's being adapted to so it knows how it will handle click events.
+                }
+            };
+        }
+    }
+
+    public interface Callback {
+        void onCellClicked(SongEntity songEntity);
     }
 }
