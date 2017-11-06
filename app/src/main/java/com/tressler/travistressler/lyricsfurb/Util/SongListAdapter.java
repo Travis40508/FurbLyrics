@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.tressler.travistressler.lyricsfurb.R;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.zip.Inflater;
 
@@ -24,6 +26,12 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
     private List<SongEntity> songList;
 
     public SongListAdapter(List<SongEntity> songList) {
+        Collections.sort(songList, new Comparator<SongEntity>() {
+            @Override
+            public int compare(SongEntity songEntity, SongEntity t1) {
+                return songEntity.getSongTitle().compareTo(t1.getSongTitle());
+            }
+        });
         this.songList = songList;
     }
 
