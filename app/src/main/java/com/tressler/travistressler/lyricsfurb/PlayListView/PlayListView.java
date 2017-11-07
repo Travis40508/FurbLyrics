@@ -32,4 +32,6 @@ public interface PlayListView {
     void showAddSongButton();
 
     void launchAddSongToPlaylistFragment(Bundle bundle);
+
+    void showLyricsForPlaylist(Bundle bundle);
 }

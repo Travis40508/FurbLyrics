@@ -127,4 +127,10 @@ public class PlayListPresenter {
         bundle.putString("PLAYLIST", playListName);
         view.launchAddSongToPlaylistFragment(bundle);
     }
+
+    public void cellClicked() {
+        Bundle bundle = new Bundle();
+        bundle.putString("PLAYLIST", playListName);
+        view.showLyricsForPlaylist(bundle);
+    }
 }

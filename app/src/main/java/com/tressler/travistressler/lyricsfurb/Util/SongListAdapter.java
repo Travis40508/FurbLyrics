@@ -154,6 +154,8 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
                         callback.onChosenSongCellClicked(songEntity);
                     } else if (source.equalsIgnoreCase("allSongsList")) {
 
+                    } else if (source.equalsIgnoreCase("playlist")) {
+                        callback.onChosenSongCellClicked(songEntity);
                     }
                     notifyDataSetChanged();
                 }

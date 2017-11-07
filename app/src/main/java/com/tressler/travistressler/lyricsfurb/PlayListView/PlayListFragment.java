@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.tressler.travistressler.lyricsfurb.AddToPlaylistView.AddToPlaylistFragment;
 import com.tressler.travistressler.lyricsfurb.Application.di.LyricsApplication;
+import com.tressler.travistressler.lyricsfurb.LyricsView.LyricsFragment;
 import com.tressler.travistressler.lyricsfurb.R;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
 import com.tressler.travistressler.lyricsfurb.Util.SongListAdapter;
@@ -161,10 +162,17 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder_playlist, addToPlaylistFragment).commit();
     }
 
+    @Override
+    public void showLyricsForPlaylist(Bundle bundle) {
+        LyricsFragment lyricsFragment = LyricsFragment.newInstance();
+        lyricsFragment.setArguments(bundle);
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder_playlist, lyricsFragment).commit();
+    }
+
 
     @Override
     public void onChosenSongCellClicked(SongEntity songEntity) {
-
+        presenter.cellClicked();
     }
 
     @Override
