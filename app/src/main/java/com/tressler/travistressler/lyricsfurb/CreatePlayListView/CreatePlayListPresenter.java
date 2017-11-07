@@ -54,14 +54,6 @@ public class CreatePlayListPresenter {
         });
     }
 
-    public void cellClicked(SongEntity songEntity, int itemCount) {
-        songsToBeSaved.add(songEntity);
-        if (itemCount > 0) {
-            view.showSavePlaylistButton();
-        } else {
-            view.hideSavePlaylistButton();
-        }
-    }
 
     public void chosenSongListCellClicked(SongEntity songEntity) {
         songsToBeSaved.remove(songEntity);

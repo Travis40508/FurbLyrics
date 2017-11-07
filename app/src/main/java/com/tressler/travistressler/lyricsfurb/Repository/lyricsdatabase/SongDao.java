@@ -26,6 +26,9 @@ public interface SongDao {
     @Query("SELECT * FROM SongEntity")
     Flowable<List<SongEntity>> getSongs();
 
+    @Query("SELECT * FROM SongEntity")
+    List<SongEntity> getSongsStatic();
+
 
     @Query("SELECT * FROM SongEntity WHERE songTitle LIKE :title")
     SongEntity getChosenSong(String title);

@@ -73,7 +73,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
     }
 
     public void addSong(SongEntity songEntity) {
-        if(source.equalsIgnoreCase("allSongsCreatePlaylist")) {
+        if(source.equalsIgnoreCase("allSongsCreatePlaylist") || source.equalsIgnoreCase("addToPlaylistOtherSongs")) {
             songList.add(songEntity);
             Collections.sort(songList, new Comparator<SongEntity>() {
                 @Override
@@ -81,7 +81,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
                     return songEntity.getSongTitle().compareTo(t1.getSongTitle());
                 }
             });
-        } else if (source.equalsIgnoreCase("chosenSongsCreatePlaylist")) {
+        } else if (source.equalsIgnoreCase("chosenSongsCreatePlaylist") || source.equalsIgnoreCase("addToPlaylistPlaylist")) {
             songList.add(songEntity);
         }
         notifyDataSetChanged();
@@ -146,10 +146,10 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
             return new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(source.equalsIgnoreCase("allSongsCreatePlaylist")) {
+                    if(source.equalsIgnoreCase("allSongsCreatePlaylist") || source.equalsIgnoreCase("addToPlaylistOtherSongs")) {
                         songList.remove(songEntity);
                         callback.onAllSongCellClicked(songEntity);
-                    } else if(source.equalsIgnoreCase("chosenSongsCreatePlaylist")) {
+                    } else if(source.equalsIgnoreCase("chosenSongsCreatePlaylist") || source.equalsIgnoreCase("addToPlaylistPlaylist")) {
                         songList.remove(songEntity);
                         callback.onChosenSongCellClicked(songEntity);
                     } else if (source.equalsIgnoreCase("allSongsList")) {

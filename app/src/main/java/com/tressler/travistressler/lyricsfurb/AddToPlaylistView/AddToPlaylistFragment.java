@@ -3,6 +3,7 @@ package com.tressler.travistressler.lyricsfurb.AddToPlaylistView;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import com.tressler.travistressler.lyricsfurb.Application.di.LyricsApplication;
 import com.tressler.travistressler.lyricsfurb.R;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
 import com.tressler.travistressler.lyricsfurb.Util.SongListAdapter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -37,6 +40,7 @@ public class AddToPlaylistFragment extends Fragment implements AddToPlaylistView
     protected RecyclerView recyclerViewPlaylistSongs;
 
     private SongListAdapter adapter;
+    private SongListAdapter otherSongsAdapter;
 
     @Nullable
     @Override
@@ -67,16 +71,19 @@ public class AddToPlaylistFragment extends Fragment implements AddToPlaylistView
         super.onResume();
         String playlistTitle = getArguments().getString("PLAYLIST");
         presenter.retrievePlaylistTitle(playlistTitle);
+        presenter.getLists();
     }
 
     @Override
     public void onChosenSongCellClicked(SongEntity songEntity) {
-
+        presenter.chosenSongCellClicked(songEntity);
+        otherSongsAdapter.addSong(songEntity);
     }
 
     @Override
     public void onAllSongCellClicked(SongEntity songEntity) {
-
+        presenter.allSongCellClicked(songEntity);
+        adapter.addSong(songEntity);
     }
 
     @Override
@@ -92,5 +99,23 @@ public class AddToPlaylistFragment extends Fragment implements AddToPlaylistView
     @Override
     public void setTitleText(String playListTitleText) {
         playListTitle.setText(playListTitleText);
+    }
+
+    @Override
+    public void displayPlaylistSongs(List<SongEntity> songList) {
+        adapter = new SongListAdapter(songList, this, "addToPlaylistPlaylist");
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerViewPlaylistSongs.setAdapter(adapter);
+        recyclerViewPlaylistSongs.setLayoutManager(linearLayoutManager);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void displayOtherListSongs(List<SongEntity> otherSongList) {
+        otherSongsAdapter = new SongListAdapter(otherSongList, this, "addToPlaylistOtherSongs");
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerViewAllSongs.setAdapter(otherSongsAdapter);
+        recyclerViewAllSongs.setLayoutManager(linearLayoutManager);
+        otherSongsAdapter.notifyDataSetChanged();
     }
 }
