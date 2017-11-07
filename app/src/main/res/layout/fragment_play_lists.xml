@@ -22,7 +22,7 @@
             android:textStyle="bold"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:text="Create Playlist"
+            android:text="Create Setlist"
             android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -30,7 +30,7 @@
         <TextView
             android:id="@+id/play_lists_title"
             android:textSize="20sp"
-            android:text="Playlists"
+            android:text="Setlists"
             android:textColor="@android:color/white"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
