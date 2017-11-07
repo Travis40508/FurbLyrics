@@ -141,9 +141,9 @@ public class AddSongFragment extends Fragment implements AddSongView {
             playLists.add(playList.getPlayListName());
         }
         if (getContext() != null) {
-            adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, playLists);
+            adapter = new ArrayAdapter<String>(getContext(), R.layout.item_simple_spinner, playLists);
 
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            adapter.setDropDownViewResource(R.layout.item_simple_spinner_dropdown);
             playListSpinner.setAdapter(adapter);
 
             playListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
