@@ -102,5 +102,6 @@ public class PlayListPresenter {
 
     public void playListTitleRetrieved(String playListName) {
         this.playListName = playListName;
+        view.setTitle(playListName);
     }
 }

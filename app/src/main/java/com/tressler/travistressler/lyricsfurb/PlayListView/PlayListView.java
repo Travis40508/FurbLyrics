@@ -23,4 +23,5 @@ public interface PlayListView {
 
     void showSuccessToast();
 
+    void setTitle(String playListName);
 }

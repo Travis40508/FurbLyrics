@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tressler.travistressler.lyricsfurb.Application.di.LyricsApplication;
@@ -40,6 +41,9 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
 
     @BindView(R.id.button_done)
     protected Button doneButton;
+
+    @BindView(R.id.play_list_title)
+    protected TextView playlistTitle;
 
     @BindView(R.id.button_cancel)
     protected Button cancelButton;
@@ -124,6 +128,11 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
     @Override
     public void showSuccessToast() {
         Toast.makeText(getContext(), "List Successfully Updated!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setTitle(String playListName) {
+        playlistTitle.setText(playListName);
     }
 
 
