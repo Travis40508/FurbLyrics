@@ -9,6 +9,7 @@ import com.tressler.travistressler.lyricsfurb.AllSongsView.AllSongsFragment;
 import com.tressler.travistressler.lyricsfurb.Application.di.LyricsApplication;
 import com.tressler.travistressler.lyricsfurb.PlaylistsView.PlayListsFragment;
 import com.tressler.travistressler.lyricsfurb.R;
+import com.tressler.travistressler.lyricsfurb.Util.CustomViewPager;
 import com.tressler.travistressler.lyricsfurb.Util.MainViewPagerAdapter;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements MainView {
 
     @BindView(R.id.view_pager)
-    protected ViewPager viewPager;
+    protected CustomViewPager viewPager;
 
     @Inject
     protected MainPresenter presenter;
@@ -57,14 +58,20 @@ public class MainActivity extends AppCompatActivity implements MainView {
         super.onBackPressed();
     }
 
+    public void stopScrolling() {
+        viewPager.setSwipeable(false);
+    }
+
     @Override
     public void removeFragment() {
         getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.fragment_holder)).commit();
+        viewPager.setSwipeable(true);
     }
 
     @Override
     public void removeCreatePlayListFragment() {
         getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlists)).commit();
+        viewPager.setSwipeable(true);
     }
 
     @Override

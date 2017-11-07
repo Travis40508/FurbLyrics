@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.tressler.travistressler.lyricsfurb.AddSongView.AddSongFragment;
 import com.tressler.travistressler.lyricsfurb.Application.di.LyricsApplication;
+import com.tressler.travistressler.lyricsfurb.MainView.MainActivity;
 import com.tressler.travistressler.lyricsfurb.R;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
 import com.tressler.travistressler.lyricsfurb.Util.SongListAdapter;
@@ -86,6 +87,7 @@ public class AllSongsFragment extends Fragment implements AllSongsView, SongList
 
     @Override
     public void launchAddSongFragment() {
+        ((MainActivity)getActivity()).stopScrolling();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder, AddSongFragment.newInstance()).commit();
     }
 

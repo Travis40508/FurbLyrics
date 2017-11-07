@@ -41,6 +41,7 @@ public class PlayListsFragment extends Fragment implements PlayListsView, Playli
     @OnClick(R.id.button_create_play_list)
     protected void onCreatePlayListClicked(View view) {
         presenter.createPlayListClicked();
+        ((MainActivity)getActivity()).stopScrolling();
     }
 
     private PlaylistsAdapter adapter;
@@ -103,6 +104,7 @@ public class PlayListsFragment extends Fragment implements PlayListsView, Playli
         PlayListFragment playListFragment = PlayListFragment.newInstance();
         playListFragment.setArguments(bundle);
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder_playlists, playListFragment).commit();
+        ((MainActivity)getActivity()).stopScrolling();
     }
 
     @Override
