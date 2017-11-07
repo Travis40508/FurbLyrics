@@ -81,8 +81,20 @@ public class CreatePlayListPresenter {
                 for (SongEntity song : songsToBeSaved) {
                     songsInPlaylist.add(song.getSongTitle());
                 }
-                songDatabase.playlistDao().insertPlaylist(new PlaylistEntity(playListName.toUpperCase(), songsInPlaylist));
-                view.detachFragment();
+                if(playListName != null) {
+                    songDatabase.playlistDao().insertPlaylist(new PlaylistEntity(playListName.toUpperCase(), songsInPlaylist));
+                } else {
+                    AndroidSchedulers.mainThread().createWorker().schedule(new Runnable() {
+                        @Override
+                        public void run() {
+                            view.toastPlaylistNameWarning();
+                        }
+                    });
+
+                }
+                if(playListName != null) {
+                    view.detachFragment();
+                }
             }
         });
     }

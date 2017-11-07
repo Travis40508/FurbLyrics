@@ -57,7 +57,11 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
     public void onBindViewHolder(SongViewHolder holder, int position) {
         holder.bindView(songList.get(position));
         holder.cardView.setOnClickListener(holder.onCellClicked(songList.get(position)));
+        holder.songTitle.setOnClickListener(holder.onCellClicked(songList.get(position)));
+        holder.artistName.setOnClickListener(holder.onCellClicked(songList.get(position)));
         holder.cardView.setOnLongClickListener(holder.onCellLongClicked(songList.get(position)));
+        holder.songTitle.setOnLongClickListener(holder.onCellLongClicked(songList.get(position)));
+        holder.artistName.setOnLongClickListener(holder.onCellLongClicked(songList.get(position)));
         holder.upArrow.setOnClickListener(holder.onUpArrowClicked(songList.get(position)));
         holder.downArrow.setOnClickListener(holder.onDownArrowClicked(songList.get(position)));
         holder.deleteButton.setOnClickListener(holder.onDeleteClicked(songList.get(position)));

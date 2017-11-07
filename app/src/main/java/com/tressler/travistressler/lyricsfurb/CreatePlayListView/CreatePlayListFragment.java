@@ -122,6 +122,11 @@ public class CreatePlayListFragment extends Fragment implements CreatePlayListVi
                         .findFragmentById(R.id.fragment_holder_playlists)).commit();
     }
 
+    @Override
+    public void toastPlaylistNameWarning() {
+        Toast.makeText(getContext(), "Please Name Playlist Before Saving", Toast.LENGTH_SHORT).show();
+    }
+
 
     @Override
     public void onChosenSongCellClicked(SongEntity songEntity) {

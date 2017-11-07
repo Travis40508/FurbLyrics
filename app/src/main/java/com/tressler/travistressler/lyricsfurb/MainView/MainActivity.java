@@ -48,6 +48,12 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        viewPager.setSwipeable(true);
+    }
+
+    @Override
     public void populateFragmentList() {
         fragmentList.add(PlayListsFragment.newInstance());
         fragmentList.add(AllSongsFragment.newInstance());

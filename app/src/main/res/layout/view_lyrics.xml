@@ -15,7 +15,7 @@
             android:textColor="@android:color/white"
             android:id="@+id/lyrics_title"
             android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
+            android:textSize="23sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -28,7 +28,8 @@
             android:layout_marginRight="10dp">
 
             <TextView
-                android:textSize="18sp"
+                android:letterSpacing=".03"
+                android:textSize="20sp"
                 android:textAlignment="center"
                 android:id="@+id/lyrics_text"
                 android:textColor="@android:color/white"

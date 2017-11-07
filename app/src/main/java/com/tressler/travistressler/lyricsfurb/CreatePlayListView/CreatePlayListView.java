@@ -18,4 +18,6 @@ public interface CreatePlayListView {
     void hideSavePlaylistButton();
 
     void detachFragment();
+
+    void toastPlaylistNameWarning();
 }

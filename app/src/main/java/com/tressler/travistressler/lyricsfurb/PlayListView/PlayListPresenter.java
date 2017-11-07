@@ -69,7 +69,8 @@ public class PlayListPresenter {
     }
 
 
-    //TODO splash screen, app icon, view pager with lyrics, debug what happens if a playlist has the same name
+    //TODO splash screen, debug what happens if a playlist has the same name, make sure there are 0 references to 'playlist'
+    //TODO ultimate test - add 50 songs, make 4 playlists, 20, 15, 10, and 5. use delete, move, add, etc. functions thoroughly on all.
 
     public void cellLongClicked() {
         view.hideAddSongButton();
