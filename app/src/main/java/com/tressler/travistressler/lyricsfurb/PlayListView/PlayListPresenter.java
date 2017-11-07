@@ -130,10 +130,24 @@ public class PlayListPresenter {
     }
 
     public void cellClicked(SongEntity songEntity) {
-        int position = songsInPlaylist.indexOf(songEntity.getSongTitle());
-        Bundle bundle = new Bundle();
-        bundle.putString("PLAYLIST", playListName);
-        bundle.putInt("POSITION", position);
-        view.showLyricsForPlaylist(bundle);
+        workerThread.createWorker().schedule(new Runnable() {
+            @Override
+            public void run() {
+                List<String> songsInPlaylist = songDatabase.playlistDao().getChosenPlaylist(playListName).getSongsInPlaylist();
+                int position = songsInPlaylist.indexOf(songEntity.getSongTitle());
+                Bundle bundle = new Bundle();
+                bundle.putString("PLAYLIST", playListName);
+                bundle.putInt("POSITION", position);
+
+                AndroidSchedulers.mainThread().createWorker().schedule(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.showLyricsForPlaylist(bundle);
+                    }
+                });
+            }
+        });
+
+
     }
 }
