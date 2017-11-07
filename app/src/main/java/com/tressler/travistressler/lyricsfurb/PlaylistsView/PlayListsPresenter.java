@@ -113,5 +113,7 @@ public class PlayListsPresenter {
             }
         });
         view.toastDeleteSuccess();
+        view.showCreateButton();
+        view.hideDoneButton();
     }
 }
