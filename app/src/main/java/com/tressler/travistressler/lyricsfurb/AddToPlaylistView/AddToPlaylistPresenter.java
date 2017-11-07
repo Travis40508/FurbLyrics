@@ -1,5 +1,6 @@
 package com.tressler.travistressler.lyricsfurb.AddToPlaylistView;
 
+import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.PlaylistEntity;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongDatabase;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
 
@@ -57,6 +58,7 @@ public class AddToPlaylistPresenter {
                     }
                 }
                 staticSongList.removeAll(songsToBeDeleted);
+                songsToBeSaved.addAll(songList);
                 view.displayOtherListSongs(staticSongList);
             }
         });
@@ -76,5 +78,22 @@ public class AddToPlaylistPresenter {
 
     public void allSongCellClicked(SongEntity songEntity) {
         songsToBeSaved.add(songEntity);
+    }
+
+    public void saveNewPlaylist() {
+        workerThread.createWorker().schedule(new Runnable() {
+            @Override
+            public void run() {
+                List<String> newSongs = new ArrayList<>();
+                PlaylistEntity playlistEntity = songDatabase.playlistDao().getChosenPlaylist(playListTitle);
+                for(SongEntity song : songsToBeSaved) {
+                    newSongs.add(song.getSongTitle());
+                }
+                playlistEntity.setSongsInPlaylist(newSongs);
+                songDatabase.playlistDao().updatePlaylist(playlistEntity);
+            }
+        });
+        view.toastSuccess();
+        view.detachFragment();
     }
 }

@@ -14,4 +14,8 @@ public interface AddToPlaylistView {
     void displayPlaylistSongs(List<SongEntity> songList);
 
     void displayOtherListSongs(List<SongEntity> otherSongList);
+
+    void toastSuccess();
+
+    void detachFragment();
 }

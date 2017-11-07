@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tressler.travistressler.lyricsfurb.Application.di.LyricsApplication;
 import com.tressler.travistressler.lyricsfurb.R;
@@ -21,6 +22,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by travistressler on 11/6/17.
@@ -41,6 +43,11 @@ public class AddToPlaylistFragment extends Fragment implements AddToPlaylistView
 
     private SongListAdapter adapter;
     private SongListAdapter otherSongsAdapter;
+
+    @OnClick(R.id.button_save_new_playlist)
+    protected void onSaveNewPlaylistClicked(View view) {
+        presenter.saveNewPlaylist();
+    }
 
     @Nullable
     @Override
@@ -117,5 +124,15 @@ public class AddToPlaylistFragment extends Fragment implements AddToPlaylistView
         recyclerViewAllSongs.setAdapter(otherSongsAdapter);
         recyclerViewAllSongs.setLayoutManager(linearLayoutManager);
         otherSongsAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void toastSuccess() {
+        Toast.makeText(getContext(), "Playlist Updated!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void detachFragment() {
+        getActivity().getSupportFragmentManager().beginTransaction().remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlist)).commit();
     }
 }
