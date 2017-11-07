@@ -1,6 +1,8 @@
 package com.tressler.travistressler.lyricsfurb.AllSongsView;
 
+import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.PlaylistEntity;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongDatabase;
+import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
 
 import javax.inject.Inject;
 
@@ -58,5 +60,37 @@ public class AllSongsPresenter {
     public void cancelButtonClicked() {
         view.hideCancelButton();
         view.hideDeleteIconInList();
+    }
+
+    public void deleteClicked(SongEntity songEntity) {
+        view.showAlertDialog(songEntity);
+    }
+
+    public void confirmDeleteClicked(SongEntity songEntity) {
+        workerThread.createWorker().schedule(new Runnable() {
+            @Override
+            public void run() {
+                songDatabase.songDao().deleteSongEntity(songEntity);
+                songDatabase.playlistDao().getPlaylists()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(playlistEntities -> {
+                            for(PlaylistEntity playlistEntity : playlistEntities) {
+                                if(playlistEntity.getSongsInPlaylist().contains(songEntity.getSongTitle())) {
+                                    playlistEntity.removeFromPlaylist(songEntity.getSongTitle());
+                                    workerThread.createWorker().schedule(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            songDatabase.playlistDao().updatePlaylist(playlistEntity);
+                                        }
+                                    });
+
+                                }
+                            }
+                        });
+            }
+        });
+        view.hideCancelButton();
+        view.toastDeleteSuccessful();
     }
 }

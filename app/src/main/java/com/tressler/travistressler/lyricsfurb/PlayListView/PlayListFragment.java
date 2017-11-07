@@ -141,4 +141,9 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
     public void onCellLongClicked() {
         presenter.cellLongClicked();
     }
+
+    @Override
+    public void deleteClicked(SongEntity songEntity) {
+
+    }
 }

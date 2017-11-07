@@ -21,4 +21,8 @@ public interface AllSongsView {
     void hideCancelButton();
 
     void hideDeleteIconInList();
+
+    void showAlertDialog(SongEntity songEntity);
+
+    void toastDeleteSuccessful();
 }

@@ -218,7 +218,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
                         songList.remove(songEntity);
                         notifyDataSetChanged();
                     } else if (source.equalsIgnoreCase("allSongsList")) {
-
+                        callback.deleteClicked(songEntity);
                     }
                 }
             };
@@ -233,6 +233,6 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
         void onChosenSongCellClicked(SongEntity songEntity);
         void onAllSongCellClicked(SongEntity songEntity);
         void onCellLongClicked();
-
+        void deleteClicked(SongEntity songEntity);
     }
 }

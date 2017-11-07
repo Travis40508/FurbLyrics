@@ -50,4 +50,8 @@ public class PlaylistEntity {
     public void addToPlaylist(String songtitle) {
         songsInPlaylist.add(songtitle);
     }
+
+    public void removeFromPlaylist(String songTitle) {
+        songsInPlaylist.remove(songTitle);
+    }
 }

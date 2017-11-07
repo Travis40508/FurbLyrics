@@ -1,5 +1,8 @@
 package com.tressler.travistressler.lyricsfurb.AllSongsView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -117,6 +120,35 @@ public class AllSongsFragment extends Fragment implements AllSongsView, SongList
         adapter.hideExtraOptions();
     }
 
+    @Override
+    public void showAlertDialog(SongEntity songEntity) {
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(getContext());
+        }
+        builder.setTitle("Delete Song")
+                .setMessage("Are you sure you want to delete this song?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.confirmDeleteClicked(songEntity);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    @Override
+    public void toastDeleteSuccessful() {
+        Toast.makeText(getContext(), "Song Successfully Deleted!", Toast.LENGTH_SHORT).show();
+    }
+
 
     @Override
     public void onChosenSongCellClicked(SongEntity songEntity) {
@@ -131,5 +163,10 @@ public class AllSongsFragment extends Fragment implements AllSongsView, SongList
     @Override
     public void onCellLongClicked() {
         presenter.cellLongClicked();
+    }
+
+    @Override
+    public void deleteClicked(SongEntity songEntity) {
+        presenter.deleteClicked(songEntity);
     }
 }

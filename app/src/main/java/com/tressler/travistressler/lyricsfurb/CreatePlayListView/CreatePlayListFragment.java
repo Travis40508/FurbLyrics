@@ -139,4 +139,9 @@ public class CreatePlayListFragment extends Fragment implements CreatePlayListVi
     public void onCellLongClicked() {
 
     }
+
+    @Override
+    public void deleteClicked(SongEntity songEntity) {
+
+    }
 }
