@@ -80,15 +80,15 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
     public void onStart() {
         super.onStart();
         presenter.attachView(this);
+        List<String> songsInPlaylist = getArguments().getStringArrayList("SONGS");
+        String playListName = getArguments().getString("PLAYLIST");
+        presenter.playListTitleRetrieved(playListName);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        List<String> songsInPlaylist = getArguments().getStringArrayList("SONGS");
-        String playListName = getArguments().getString("PLAYLIST");
-        presenter.songsRetrieved(songsInPlaylist);
-        presenter.playListTitleRetrieved(playListName);
+        presenter.onResume();
     }
 
     public static PlayListFragment newInstance() {

@@ -45,20 +45,31 @@ public class PlayListPresenter {
         }
     }
 
-    public void songsRetrieved(List<String> songsInPlaylist) {
-        this.songsInPlaylist = songsInPlaylist;
+    public void onResume() {
         workerThread.createWorker().schedule(new Runnable() {
             @Override
             public void run() {
+                List<String> playlistSongs = songDatabase.playlistDao().getChosenPlaylist(playListName).getSongsInPlaylist();
                 songList.clear();
-                for(String item : songsInPlaylist) {
+                for(String item : playlistSongs) {
                     SongEntity songEntity = songDatabase.songDao().getChosenSong(item);
                     songList.add(songEntity);
                 }
+                showSongs(songList);
             }
         });
-        view.showPlaylistSongs(songList);
     }
+
+    public void showSongs(List<SongEntity> songList) {
+        AndroidSchedulers.mainThread().createWorker().schedule(new Runnable() {
+            @Override
+            public void run() {
+                view.showPlaylistSongs(songList);
+            }
+        });
+    }
+
+    //TODO Titles, Dropdown Design, Design of creating playlist with sections, splash screen, app icon, view pager with lyrics
 
     public void cellLongClicked() {
         view.hideAddSongButton();

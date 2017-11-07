@@ -63,6 +63,9 @@ public class AddToPlaylistFragment extends Fragment implements AddToPlaylistView
     public void onStart() {
         super.onStart();
         presenter.attachView(this);
+        String playlistTitle = getArguments().getString("PLAYLIST");
+        presenter.retrievePlaylistTitle(playlistTitle);
+        presenter.getLists();
     }
 
     public static AddToPlaylistFragment newInstance() {
@@ -74,13 +77,7 @@ public class AddToPlaylistFragment extends Fragment implements AddToPlaylistView
         return fragment;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        String playlistTitle = getArguments().getString("PLAYLIST");
-        presenter.retrievePlaylistTitle(playlistTitle);
-        presenter.getLists();
-    }
+
 
     @Override
     public void onChosenSongCellClicked(SongEntity songEntity) {
@@ -134,6 +131,7 @@ public class AddToPlaylistFragment extends Fragment implements AddToPlaylistView
 
     @Override
     public void detachFragment(List<String> newSongs) {
-        getActivity().getSupportFragmentManager().beginTransaction().remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlists)).commit();
+        getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlists).onResume();
+        getActivity().getSupportFragmentManager().beginTransaction().remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlist)).commit();
     }
 }
