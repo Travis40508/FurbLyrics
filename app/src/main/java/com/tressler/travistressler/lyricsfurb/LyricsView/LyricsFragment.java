@@ -37,6 +37,8 @@ public class LyricsFragment extends Fragment implements LyricsView {
 
     private MainPagerAdapter pagerAdapter;
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

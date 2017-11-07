@@ -68,6 +68,8 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
         presenter.addToPlaylistButtonClicked();
     }
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
