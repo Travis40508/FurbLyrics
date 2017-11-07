@@ -150,6 +150,7 @@ public class AllSongsFragment extends Fragment implements AllSongsView, SongList
     }
 
 
+
     @Override
     public void onChosenSongCellClicked(SongEntity songEntity) {
 

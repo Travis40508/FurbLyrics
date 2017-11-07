@@ -93,4 +93,5 @@ public class AllSongsPresenter {
         view.hideCancelButton();
         view.toastDeleteSuccessful();
     }
+
 }

@@ -25,4 +25,5 @@ public interface AllSongsView {
     void showAlertDialog(SongEntity songEntity);
 
     void toastDeleteSuccessful();
+
 }

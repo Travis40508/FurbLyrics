@@ -41,6 +41,7 @@
 
 
         <ImageView
+            android:layout_marginTop="5dp"
             android:visibility="gone"
             android:id="@+id/button_up_arrow"
             android:layout_gravity="end|top"
@@ -49,6 +50,7 @@
             android:layout_height="wrap_content" />
 
         <ImageView
+            android:layout_marginBottom="5dp"
             android:visibility="gone"
             android:id="@+id/button_down_arrow"
             android:layout_gravity="end|bottom"
