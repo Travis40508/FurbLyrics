@@ -81,7 +81,7 @@ public class CreatePlayListPresenter {
                 for (SongEntity song : songsToBeSaved) {
                     songsInPlaylist.add(song.getSongTitle());
                 }
-                songDatabase.playlistDao().insertPlaylist(new PlaylistEntity(playListName, songsInPlaylist));
+                songDatabase.playlistDao().insertPlaylist(new PlaylistEntity(playListName.toUpperCase(), songsInPlaylist));
                 view.detachFragment();
             }
         });

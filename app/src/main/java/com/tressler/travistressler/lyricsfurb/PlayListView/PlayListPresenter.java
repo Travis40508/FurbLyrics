@@ -69,7 +69,7 @@ public class PlayListPresenter {
     }
 
 
-    //TODO Dropdown Design, splash screen, app icon, view pager with lyrics
+    //TODO Dropdown Design, splash screen, app icon, view pager with lyrics, debug what happens if a playlist has the same name
 
     public void cellLongClicked() {
         view.hideAddSongButton();

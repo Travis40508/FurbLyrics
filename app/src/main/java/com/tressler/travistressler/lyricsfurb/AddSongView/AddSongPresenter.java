@@ -83,7 +83,7 @@ public class AddSongPresenter {
                 @Override
                 public void run() {
                     PlaylistEntity playlistEntity = songDatabase.playlistDao().getChosenPlaylist(playListSelected);
-                    SongEntity newSong = new SongEntity(songTitle, artistName, song.getLyrics());
+                    SongEntity newSong = new SongEntity(songTitle.toUpperCase(), artistName.toUpperCase(), song.getLyrics());
                     songDatabase.songDao().insertSongEntity(newSong);
                     if(playlistEntity != null) {
                         playlistEntity.addToPlaylist(newSong.getSongTitle());
