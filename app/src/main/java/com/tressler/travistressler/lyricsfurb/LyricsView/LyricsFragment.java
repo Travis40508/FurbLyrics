@@ -31,6 +31,10 @@ public class LyricsFragment extends Fragment implements LyricsView {
     @Inject LyricsPresenter presenter;
     @BindView(R.id.main_view_pager)
     protected ViewPager pager;
+
+    @BindView(R.id.lyrics_play_list_title)
+    protected TextView playListTitle;
+
     private MainPagerAdapter pagerAdapter;
 
     @Nullable
@@ -47,7 +51,8 @@ public class LyricsFragment extends Fragment implements LyricsView {
         super.onStart();
         presenter.attachView(this);
         String playlistName = getArguments().getString("PLAYLIST");
-        presenter.songsRetrieved(playlistName);
+        int position = getArguments().getInt("POSITION");
+        presenter.songsRetrieved(playlistName, position);
         pagerAdapter = new MainPagerAdapter();
         pager.setAdapter(pagerAdapter);
 
@@ -63,7 +68,7 @@ public class LyricsFragment extends Fragment implements LyricsView {
     }
 
     @Override
-    public void showLyricsForPlaylist(List<SongEntity> lyricsList) {
+    public void showLyricsForPlaylist(List<SongEntity> lyricsList, int position) {
         for(int i = lyricsList.size() - 1; i >= 0; i--) {
             LayoutInflater layoutInflater = getActivity().getLayoutInflater();
             FrameLayout v0 = (FrameLayout) layoutInflater.inflate (R.layout.view_lyrics, null);
@@ -74,5 +79,11 @@ public class LyricsFragment extends Fragment implements LyricsView {
             pagerAdapter.addView(v0, 0);
         }
         pagerAdapter.notifyDataSetChanged();
+        pager.setCurrentItem(position);
+    }
+
+    @Override
+    public void showPlaylistTitle(String playListName) {
+        playListTitle.setText(playListName);
     }
 }

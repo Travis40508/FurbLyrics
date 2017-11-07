@@ -172,7 +172,7 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
 
     @Override
     public void onChosenSongCellClicked(SongEntity songEntity) {
-        presenter.cellClicked();
+        presenter.cellClicked(songEntity);
     }
 
     @Override

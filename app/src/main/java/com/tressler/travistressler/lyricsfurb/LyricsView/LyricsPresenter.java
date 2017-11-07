@@ -31,7 +31,7 @@ public class LyricsPresenter {
         this.view = view;
     }
 
-    public void songsRetrieved(String playListName) {
+    public void songsRetrieved(String playListName, int position) {
         List<SongEntity> songsList = new ArrayList<>();
         workerThread.createWorker().schedule(new Runnable() {
             @Override
@@ -44,7 +44,8 @@ public class LyricsPresenter {
                 AndroidSchedulers.mainThread().createWorker().schedule(new Runnable() {
                     @Override
                     public void run() {
-                        view.showLyricsForPlaylist(songsList);
+                        view.showLyricsForPlaylist(songsList, position);
+                        view.showPlaylistTitle(playListName);
                     }
                 });
             }

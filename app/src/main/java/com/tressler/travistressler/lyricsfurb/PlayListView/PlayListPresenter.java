@@ -128,9 +128,11 @@ public class PlayListPresenter {
         view.launchAddSongToPlaylistFragment(bundle);
     }
 
-    public void cellClicked() {
+    public void cellClicked(SongEntity songEntity) {
+        int position = songsInPlaylist.indexOf(songEntity.getSongTitle());
         Bundle bundle = new Bundle();
         bundle.putString("PLAYLIST", playListName);
+        bundle.putInt("POSITION", position);
         view.showLyricsForPlaylist(bundle);
     }
 }

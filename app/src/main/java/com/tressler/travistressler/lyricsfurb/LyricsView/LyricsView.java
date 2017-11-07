@@ -9,5 +9,7 @@ import java.util.List;
  */
 
 public interface LyricsView {
-    void showLyricsForPlaylist(List<SongEntity> lyricsList);
+    void showLyricsForPlaylist(List<SongEntity> lyricsList, int position);
+
+    void showPlaylistTitle(String playListName);
 }
