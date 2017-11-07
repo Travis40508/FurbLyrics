@@ -136,7 +136,7 @@ public class AddSongFragment extends Fragment implements AddSongView {
     @Override
     public void loadSpinner(List<PlaylistEntity> playlistEntities) {
         List<String> playLists = new ArrayList<>();
-        playLists.add("No Setlist");
+        playLists.add("[Select Setlist]");
         for (PlaylistEntity playList : playlistEntities) {
             playLists.add(playList.getPlayListName());
         }
