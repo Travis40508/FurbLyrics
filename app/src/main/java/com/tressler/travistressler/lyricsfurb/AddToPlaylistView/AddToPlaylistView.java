@@ -5,4 +5,5 @@ package com.tressler.travistressler.lyricsfurb.AddToPlaylistView;
  */
 
 public interface AddToPlaylistView {
+    void setTitleText(String playListTitle);
 }

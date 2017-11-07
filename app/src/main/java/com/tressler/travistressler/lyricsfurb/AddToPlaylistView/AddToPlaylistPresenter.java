@@ -9,6 +9,7 @@ import javax.inject.Inject;
 public class AddToPlaylistPresenter {
 
     private AddToPlaylistView view;
+    private String playListTitle;
 
     @Inject
     public AddToPlaylistPresenter() {
@@ -16,5 +17,10 @@ public class AddToPlaylistPresenter {
 
     public void attachView(AddToPlaylistView view) {
         this.view = view;
+    }
+
+    public void retrievePlaylistTitle(String playlistTitle) {
+        this.playListTitle = playlistTitle;
+        view.setTitleText(playListTitle);
     }
 }
