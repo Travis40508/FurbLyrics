@@ -69,7 +69,7 @@ public class PlayListPresenter {
     }
 
 
-    //TODO Titles, Dropdown Design, Design of creating playlist with sections, splash screen, app icon, view pager with lyrics
+    //TODO Dropdown Design, splash screen, app icon, view pager with lyrics
 
     public void cellLongClicked() {
         view.hideAddSongButton();
