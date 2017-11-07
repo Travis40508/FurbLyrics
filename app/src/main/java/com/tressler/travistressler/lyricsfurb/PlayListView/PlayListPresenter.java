@@ -87,6 +87,7 @@ public class PlayListPresenter {
         workerThread.createWorker().schedule(new Runnable() {
             @Override
             public void run() {
+                songsInPlaylist = songDatabase.playlistDao().getChosenPlaylist(playListName).getSongsInPlaylist();
                 for(String item : songsInPlaylist) {
                     SongEntity songEntity = songDatabase.songDao().getChosenSong(item);
                     songList.add(songEntity);
