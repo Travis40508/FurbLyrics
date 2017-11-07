@@ -1,5 +1,6 @@
 package com.tressler.travistressler.lyricsfurb.PlayListView;
 
+import android.os.Bundle;
 import android.util.Log;
 
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.PlaylistEntity;
@@ -59,6 +60,7 @@ public class PlayListPresenter {
     }
 
     public void cellLongClicked() {
+        view.hideAddSongButton();
         view.showDoneButton();
         view.showCancelButton();
     }
@@ -79,6 +81,7 @@ public class PlayListPresenter {
             }
         });
         view.showPlaylistSongs(songList);
+        view.showAddSongButton();
     }
 
     public void doneClicked(List<SongEntity> songList) {
@@ -94,14 +97,22 @@ public class PlayListPresenter {
                 songDatabase.playlistDao().updatePlaylist(playlistEntity);
             }
         });
+
         view.hideCancelButton();
         view.hideDoneButton();
         view.showSuccessToast();
         view.hideExtraOptions();
+        view.showAddSongButton();
     }
 
     public void playListTitleRetrieved(String playListName) {
         this.playListName = playListName;
         view.setTitle(playListName);
+    }
+
+    public void addToPlaylistButtonClicked() {
+        Bundle bundle = new Bundle();
+        bundle.putString("PLAYLIST", playListName);
+        view.launchAddSongToPlaylistFragment(bundle);
     }
 }

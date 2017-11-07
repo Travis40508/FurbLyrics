@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tressler.travistressler.lyricsfurb.AddToPlaylistView.AddToPlaylistFragment;
 import com.tressler.travistressler.lyricsfurb.Application.di.LyricsApplication;
 import com.tressler.travistressler.lyricsfurb.R;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
@@ -42,6 +43,9 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
     @BindView(R.id.button_done)
     protected Button doneButton;
 
+    @BindView(R.id.button_add_to_play_list)
+    protected Button addToPlaylist;
+
     @BindView(R.id.play_list_title)
     protected TextView playlistTitle;
 
@@ -56,6 +60,11 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
     @OnClick(R.id.button_done)
     protected void onDoneButtonClicked(View view) {
         presenter.doneClicked(adapter.getSongList());
+    }
+
+    @OnClick(R.id.button_add_to_play_list)
+    protected void onAddToPlaylistButtonClicked(View view) {
+        presenter.addToPlaylistButtonClicked();
     }
 
     @Nullable
@@ -133,6 +142,21 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
     @Override
     public void setTitle(String playListName) {
         playlistTitle.setText(playListName);
+    }
+
+    @Override
+    public void hideAddSongButton() {
+        addToPlaylist.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showAddSongButton() {
+        addToPlaylist.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void launchAddSongToPlaylistFragment(Bundle bundle) {
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder_playlist, AddToPlaylistFragment.newInstance()).commit();
     }
 
 

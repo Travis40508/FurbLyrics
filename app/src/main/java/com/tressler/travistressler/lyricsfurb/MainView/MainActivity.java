@@ -68,9 +68,15 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
+    public void removeAddToPlaylistFragment() {
+        getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlist)).commit();
+    }
+
+    @Override
     public void onBackPressed() {
         presenter.onBackPressed(getSupportFragmentManager().findFragmentById(R.id.fragment_holder) == null,
-                getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlists) == null);
+                getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlists) == null,
+                getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlist) == null);
     }
 
     public void transitionToAllSongsFragment() {

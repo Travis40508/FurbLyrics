@@ -1,6 +1,7 @@
 package com.tressler.travistressler.lyricsfurb.Application.di;
 
 import com.tressler.travistressler.lyricsfurb.AddSongView.AddSongFragment;
+import com.tressler.travistressler.lyricsfurb.AddToPlaylistView.AddToPlaylistFragment;
 import com.tressler.travistressler.lyricsfurb.AllSongsView.AllSongsFragment;
 import com.tressler.travistressler.lyricsfurb.CreatePlayListView.CreatePlayListFragment;
 import com.tressler.travistressler.lyricsfurb.MainView.MainActivity;
@@ -32,4 +33,6 @@ public interface ApplicationComponent {
     void inject(PlayListFragment playListFragment);
 
     void inject(CreatePlayListFragment createPlayListFragment);
+
+    void inject(AddToPlaylistFragment addToPlaylistFragment);
 }

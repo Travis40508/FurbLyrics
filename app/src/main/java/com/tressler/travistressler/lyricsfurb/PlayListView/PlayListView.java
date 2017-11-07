@@ -1,5 +1,7 @@
 package com.tressler.travistressler.lyricsfurb.PlayListView;
 
+import android.os.Bundle;
+
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
 
 import java.util.List;
@@ -24,4 +26,10 @@ public interface PlayListView {
     void showSuccessToast();
 
     void setTitle(String playListName);
+
+    void hideAddSongButton();
+
+    void showAddSongButton();
+
+    void launchAddSongToPlaylistFragment(Bundle bundle);
 }

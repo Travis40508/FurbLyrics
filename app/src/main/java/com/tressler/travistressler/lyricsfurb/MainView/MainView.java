@@ -12,4 +12,6 @@ public interface MainView {
     void removeFragment();
 
     void removeCreatePlayListFragment();
+
+    void removeAddToPlaylistFragment();
 }
