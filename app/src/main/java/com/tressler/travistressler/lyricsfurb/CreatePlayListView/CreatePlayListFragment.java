@@ -124,7 +124,12 @@ public class CreatePlayListFragment extends Fragment implements CreatePlayListVi
 
     @Override
     public void toastPlaylistNameWarning() {
-        Toast.makeText(getContext(), "Please Name Playlist Before Saving", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Please Name Setlist Before Saving", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void toastPlaylistAlreadyExists() {
+        Toast.makeText(getContext(), "A Setlist With That Name Already Exists", Toast.LENGTH_SHORT).show();
     }
 
 

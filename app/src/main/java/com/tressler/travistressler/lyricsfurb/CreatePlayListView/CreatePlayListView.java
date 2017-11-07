@@ -20,4 +20,6 @@ public interface CreatePlayListView {
     void detachFragment();
 
     void toastPlaylistNameWarning();
+
+    void toastPlaylistAlreadyExists();
 }

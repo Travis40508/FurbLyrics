@@ -26,6 +26,9 @@ public interface PlaylistDao {
     @Query("SELECT * FROM PlaylistEntity")
     Flowable<List<PlaylistEntity>> getPlaylists();
 
+    @Query("SELECT * FROM PlaylistEntity")
+    List<PlaylistEntity> getStaticPlaylist();
+
     @Query("SELECT * FROM PlaylistEntity WHERE playListName LIKE :name")
     PlaylistEntity getChosenPlaylist(String name);
 

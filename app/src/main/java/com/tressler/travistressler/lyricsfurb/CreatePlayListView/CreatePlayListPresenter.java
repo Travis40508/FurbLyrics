@@ -81,8 +81,21 @@ public class CreatePlayListPresenter {
                 for (SongEntity song : songsToBeSaved) {
                     songsInPlaylist.add(song.getSongTitle());
                 }
-                if(playListName != null) {
+                if (playListName.length() > 0 && songDatabase.playlistDao().getChosenPlaylist(playListName) == null) {
                     songDatabase.playlistDao().insertPlaylist(new PlaylistEntity(playListName.toUpperCase(), songsInPlaylist));
+                    AndroidSchedulers.mainThread().createWorker().schedule(new Runnable() {
+                        @Override
+                        public void run() {
+                            view.detachFragment();
+                        }
+                    });
+                } else if (playListName.length() > 0 && songDatabase.playlistDao().getChosenPlaylist(playListName).getPlayListName().equalsIgnoreCase(playListName)) {
+                    AndroidSchedulers.mainThread().createWorker().schedule(new Runnable() {
+                        @Override
+                        public void run() {
+                            view.toastPlaylistAlreadyExists();
+                        }
+                    });
                 } else {
                     AndroidSchedulers.mainThread().createWorker().schedule(new Runnable() {
                         @Override
@@ -92,9 +105,7 @@ public class CreatePlayListPresenter {
                     });
 
                 }
-                if(playListName != null) {
-                    view.detachFragment();
-                }
+
             }
         });
     }
