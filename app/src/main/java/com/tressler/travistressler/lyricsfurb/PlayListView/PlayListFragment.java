@@ -60,10 +60,6 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
         View view = inflater.inflate(R.layout.fragment_play_list, container, false);
         ButterKnife.bind(this, view);
         ((LyricsApplication) getActivity().getApplication()).getComponent().inject(this);
-        List<String> songsInPlaylist = getArguments().getStringArrayList("SONGS");
-        String playListName = getArguments().getString("PLAYLIST");
-        presenter.songsRetrieved(songsInPlaylist);
-        presenter.playListTitleRetrieved(playListName);
         return view;
     }
 
@@ -71,6 +67,15 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
     public void onStart() {
         super.onStart();
         presenter.attachView(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<String> songsInPlaylist = getArguments().getStringArrayList("SONGS");
+        String playListName = getArguments().getString("PLAYLIST");
+        presenter.songsRetrieved(songsInPlaylist);
+        presenter.playListTitleRetrieved(playListName);
     }
 
     public static PlayListFragment newInstance() {

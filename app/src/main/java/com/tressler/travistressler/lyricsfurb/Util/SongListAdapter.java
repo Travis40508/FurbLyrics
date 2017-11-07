@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.tressler.travistressler.lyricsfurb.R;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -30,6 +31,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
     private final Callback callback;
     private final String source;
     private List<SongEntity> songList;
+    private List<SongEntity> referenceList;
 
     public SongListAdapter(List<SongEntity> songList, Callback callback, String source) {
         if(!source.equalsIgnoreCase("playlist")) {
@@ -58,6 +60,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
         holder.cardView.setOnLongClickListener(holder.onCellLongClicked(songList.get(position)));
         holder.upArrow.setOnClickListener(holder.onUpArrowClicked(songList.get(position)));
         holder.downArrow.setOnClickListener(holder.onDownArrowClicked(songList.get(position)));
+        holder.deleteButton.setOnClickListener(holder.onDeleteClicked(songList.get(position)));
     }
 
     @Override
@@ -91,6 +94,8 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
             notifyDataSetChanged();
         }
     }
+
+
 
     public class SongViewHolder extends RecyclerView.ViewHolder {
 
@@ -204,6 +209,20 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
                 }
             };
         }
+
+        public View.OnClickListener onDeleteClicked(SongEntity songEntity) {
+            return new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(source.equalsIgnoreCase("playList")) {
+                        songList.remove(songEntity);
+                        notifyDataSetChanged();
+                    } else if (source.equalsIgnoreCase("allSongsList")) {
+
+                    }
+                }
+            };
+        }
     }
 
     public List<SongEntity> getSongList() {
@@ -214,5 +233,6 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
         void onChosenSongCellClicked(SongEntity songEntity);
         void onAllSongCellClicked(SongEntity songEntity);
         void onCellLongClicked();
+
     }
 }

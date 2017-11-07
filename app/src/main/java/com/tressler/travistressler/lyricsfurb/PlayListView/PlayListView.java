@@ -22,4 +22,5 @@ public interface PlayListView {
     void hideExtraOptions();
 
     void showSuccessToast();
+
 }

@@ -26,12 +26,15 @@ public class PlayListPresenter {
     private PlayListView view;
     private List<SongEntity> playlistSongs;
     private String playListName;
+    private List<SongEntity> songList;
+    private List<String> songsInPlaylist;
 
     @Inject
     public PlayListPresenter(SongDatabase songDatabase, Scheduler workerThread) {
         this.songDatabase = songDatabase;
         this.workerThread = workerThread;
         playlistSongs = new ArrayList<>();
+        songList = new ArrayList<>();
     }
 
     public void attachView(PlayListView view) {
@@ -42,7 +45,7 @@ public class PlayListPresenter {
     }
 
     public void songsRetrieved(List<String> songsInPlaylist) {
-        List<SongEntity> songList = new ArrayList<>();
+        this.songsInPlaylist = songsInPlaylist;
         workerThread.createWorker().schedule(new Runnable() {
             @Override
             public void run() {
@@ -50,9 +53,9 @@ public class PlayListPresenter {
                     SongEntity songEntity = songDatabase.songDao().getChosenSong(item);
                     songList.add(songEntity);
                 }
-                view.showPlaylistSongs(songList);
             }
         });
+        view.showPlaylistSongs(songList);
     }
 
     public void cellLongClicked() {
@@ -61,16 +64,28 @@ public class PlayListPresenter {
     }
 
     public void cancelClicked() {
+        songList.clear();
         view.hideCancelButton();
         view.hideDoneButton();
         view.hideExtraOptions();
-    }
 
-    public void doneClicked(List<SongEntity> songList) {
         workerThread.createWorker().schedule(new Runnable() {
             @Override
             public void run() {
-                List<String> songTitles = new ArrayList<>();
+                for(String item : songsInPlaylist) {
+                    SongEntity songEntity = songDatabase.songDao().getChosenSong(item);
+                    songList.add(songEntity);
+                }
+            }
+        });
+        view.showPlaylistSongs(songList);
+    }
+
+    public void doneClicked(List<SongEntity> songList) {
+        List<String> songTitles = new ArrayList<>();
+        workerThread.createWorker().schedule(new Runnable() {
+            @Override
+            public void run() {
                 PlaylistEntity playlistEntity = songDatabase.playlistDao().getChosenPlaylist(playListName);
                 for(SongEntity song : songList) {
                     songTitles.add(song.getSongTitle());
