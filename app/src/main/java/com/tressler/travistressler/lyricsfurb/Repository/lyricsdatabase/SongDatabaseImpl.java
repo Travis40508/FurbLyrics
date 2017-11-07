@@ -8,7 +8,7 @@ import android.arch.persistence.room.TypeConverters;
  * Created by travistressler on 11/4/17.
  */
 
-@Database(version = 3, entities = {SongEntity.class, PlaylistEntity.class})
+@Database(version = 4, entities = {SongEntity.class, PlaylistEntity.class})
 @TypeConverters({Converters.class})
 
 public abstract class SongDatabaseImpl extends RoomDatabase implements SongDatabase{

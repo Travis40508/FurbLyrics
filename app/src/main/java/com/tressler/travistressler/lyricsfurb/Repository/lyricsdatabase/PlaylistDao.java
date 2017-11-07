@@ -35,4 +35,7 @@ public interface PlaylistDao {
     @Update
     void updatePlaylist(PlaylistEntity playlistEntity);
 
+    @Delete
+    void deletePlaylist(PlaylistEntity playlistEntity);
+
 }

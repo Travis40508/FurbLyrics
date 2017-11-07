@@ -22,4 +22,20 @@ public interface PlayListsView {
     void showErrorLoadingListToast();
 
     void launchPlaylistFragment(Bundle bundle);
+
+    void hideDeleteButtons();
+
+    void hideDoneButton();
+
+    void showCreateButton();
+
+    void showDeleteButtons();
+
+    void showDoneButton();
+
+    void hideCreateButton();
+
+    void showAlertDialog();
+
+    void toastDeleteSuccess();
 }

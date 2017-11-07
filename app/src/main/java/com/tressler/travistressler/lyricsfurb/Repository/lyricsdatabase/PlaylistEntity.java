@@ -17,10 +17,12 @@ public class PlaylistEntity {
 
     private String playListName;
     private List<String> songsInPlaylist;
+    private boolean deletingEnabled;
 
     public PlaylistEntity(String playListName, List<String> songsInPlaylist) {
         this.playListName = playListName;
         this.songsInPlaylist = songsInPlaylist;
+        deletingEnabled = false;
     }
 
     public int getId() {
@@ -53,5 +55,13 @@ public class PlaylistEntity {
 
     public void removeFromPlaylist(String songTitle) {
         songsInPlaylist.remove(songTitle);
+    }
+
+    public boolean isDeletingEnabled() {
+        return deletingEnabled;
+    }
+
+    public void setDeletingEnabled(boolean deletingEnabled) {
+        this.deletingEnabled = deletingEnabled;
     }
 }

@@ -24,6 +24,7 @@ public class PlayListsPresenter {
     private final Scheduler workerThread;
     private PlayListsView view;
     private int listSize = 0;
+    private PlaylistEntity playListToBeDeleted;
 
     @Inject
     public PlayListsPresenter(SongDatabase songDatabase, Scheduler workerThread) {
@@ -85,5 +86,32 @@ public class PlayListsPresenter {
         bundle.putStringArrayList("SONGS", (ArrayList<String>) songsInPlaylist);
         bundle.putString("PLAYLIST", playlistEntity.getPlayListName());
         view.launchPlaylistFragment(bundle);
+    }
+
+    public void doneClicked() {
+        view.hideDeleteButtons();
+        view.hideDoneButton();
+        view.showCreateButton();
+    }
+
+    public void onCellLongClicked() {
+        view.showDeleteButtons();
+        view.showDoneButton();
+        view.hideCreateButton();
+    }
+
+    public void deleteClicked(PlaylistEntity playlistEntity) {
+        this.playListToBeDeleted = playlistEntity;
+        view.showAlertDialog();
+    }
+
+    public void confirmDeleteClicked() {
+        workerThread.createWorker().schedule(new Runnable() {
+            @Override
+            public void run() {
+                songDatabase.playlistDao().deletePlaylist(playListToBeDeleted);
+            }
+        });
+        view.toastDeleteSuccess();
     }
 }
