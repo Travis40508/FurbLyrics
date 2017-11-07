@@ -16,6 +16,7 @@ import com.tressler.travistressler.lyricsfurb.R;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
 import com.tressler.travistressler.lyricsfurb.Util.SongListAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -132,7 +133,7 @@ public class AddToPlaylistFragment extends Fragment implements AddToPlaylistView
     }
 
     @Override
-    public void detachFragment() {
-        getActivity().getSupportFragmentManager().beginTransaction().remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlist)).commit();
+    public void detachFragment(List<String> newSongs) {
+        getActivity().getSupportFragmentManager().beginTransaction().remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlists)).commit();
     }
 }

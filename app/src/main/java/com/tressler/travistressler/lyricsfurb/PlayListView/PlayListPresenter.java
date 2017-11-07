@@ -50,6 +50,7 @@ public class PlayListPresenter {
         workerThread.createWorker().schedule(new Runnable() {
             @Override
             public void run() {
+                songList.clear();
                 for(String item : songsInPlaylist) {
                     SongEntity songEntity = songDatabase.songDao().getChosenSong(item);
                     songList.add(songEntity);

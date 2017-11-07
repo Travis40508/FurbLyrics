@@ -17,5 +17,5 @@ public interface AddToPlaylistView {
 
     void toastSuccess();
 
-    void detachFragment();
+    void detachFragment(List<String> newSongs);
 }

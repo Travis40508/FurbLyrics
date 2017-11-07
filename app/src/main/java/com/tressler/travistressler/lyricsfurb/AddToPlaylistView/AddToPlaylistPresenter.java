@@ -81,10 +81,10 @@ public class AddToPlaylistPresenter {
     }
 
     public void saveNewPlaylist() {
+        List<String> newSongs = new ArrayList<>();
         workerThread.createWorker().schedule(new Runnable() {
             @Override
             public void run() {
-                List<String> newSongs = new ArrayList<>();
                 PlaylistEntity playlistEntity = songDatabase.playlistDao().getChosenPlaylist(playListTitle);
                 for(SongEntity song : songsToBeSaved) {
                     newSongs.add(song.getSongTitle());
@@ -94,6 +94,6 @@ public class AddToPlaylistPresenter {
             }
         });
         view.toastSuccess();
-        view.detachFragment();
+        view.detachFragment(newSongs);
     }
 }
