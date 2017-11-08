@@ -36,14 +36,14 @@ public class MainActivity extends AppCompatActivity implements MainView {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         ((LyricsApplication)getApplication()).getComponent().inject(this);
+        adapter = new MainViewPagerAdapter(getSupportFragmentManager(), fragmentList);
+        viewPager.setAdapter(adapter);
         presenter.attachView(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        adapter = new MainViewPagerAdapter(getSupportFragmentManager(), fragmentList);
-        viewPager.setAdapter(adapter);
     }
 
     @Override
