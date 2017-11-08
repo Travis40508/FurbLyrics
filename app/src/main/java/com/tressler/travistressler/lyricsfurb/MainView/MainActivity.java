@@ -95,4 +95,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void transitionToAllSongsFragment() {
         viewPager.setCurrentItem(1);
     }
+
+    public void startScrolling() {
+        viewPager.setSwipeable(true);
+    }
 }

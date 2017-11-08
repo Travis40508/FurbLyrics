@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.tressler.travistressler.lyricsfurb.Application.di.LyricsApplication;
+import com.tressler.travistressler.lyricsfurb.MainView.MainActivity;
 import com.tressler.travistressler.lyricsfurb.R;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
 import com.tressler.travistressler.lyricsfurb.Util.SongListAdapter;
@@ -117,6 +118,7 @@ public class CreatePlayListFragment extends Fragment implements CreatePlayListVi
 
     @Override
     public void detachFragment() {
+        ((MainActivity)getActivity()).startScrolling();
         getActivity().getSupportFragmentManager().beginTransaction()
                 .remove(getActivity().getSupportFragmentManager()
                         .findFragmentById(R.id.fragment_holder_playlists)).commit();
