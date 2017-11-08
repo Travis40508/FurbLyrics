@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tressler.travistressler.lyricsfurb.MainView.MainActivity">
+    tools:context="com.tressler.travistressler.lyricspal.MainView.MainActivity">
 
-    <com.tressler.travistressler.lyricsfurb.Util.CustomViewPager
+    <com.tressler.travistressler.lyricspal.Util.CustomViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </com.tressler.travistressler.lyricsfurb.Util.CustomViewPager>
+    </com.tressler.travistressler.lyricspal.Util.CustomViewPager>
 
 </android.support.constraint.ConstraintLayout>

@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.tressler.travistressler.lyricsfurb"
+        applicationId "com.tressler.travistressler.lyricspal"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
