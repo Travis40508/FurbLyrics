@@ -179,7 +179,7 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
 
     @Override
     public void onAllSongCellClicked(SongEntity songEntity) {
-
+        //Implemented with Adapter interface, in case schema ever changes.
     }
 
     @Override
@@ -189,6 +189,6 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
 
     @Override
     public void deleteClicked(SongEntity songEntity) {
-
+        //Implemented with Adapter interface, in case schema ever changes.
     }
 }

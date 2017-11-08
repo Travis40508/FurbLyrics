@@ -93,12 +93,12 @@ public class AddToPlaylistFragment extends Fragment implements AddToPlaylistView
 
     @Override
     public void onCellLongClicked() {
-
+        //Implemented with Adapter interface, in case schema ever changes.
     }
 
     @Override
     public void deleteClicked(SongEntity songEntity) {
-
+        //Implemented with Adapter interface, in case schema ever changes.
     }
 
     @Override

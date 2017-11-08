@@ -163,7 +163,7 @@ public class AllSongsFragment extends Fragment implements AllSongsView, SongList
 
     @Override
     public void onChosenSongCellClicked(SongEntity songEntity) {
-
+        //Implemented with Adapter interface, in case schema ever changes.
     }
 
     @Override

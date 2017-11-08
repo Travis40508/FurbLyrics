@@ -147,11 +147,11 @@ public class CreatePlayListFragment extends Fragment implements CreatePlayListVi
 
     @Override
     public void onCellLongClicked() {
-
+        //Implemented with Adapter interface, in case schema ever changes.
     }
 
     @Override
     public void deleteClicked(SongEntity songEntity) {
-
+        //Implemented with Adapter interface, in case schema ever changes.
     }
 }
