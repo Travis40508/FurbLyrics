@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         viewPager.setCurrentItem(1);
     }
 
+    //Starts scrolling back up
     public void startScrolling() {
         viewPager.setSwipeable(true);
     }
