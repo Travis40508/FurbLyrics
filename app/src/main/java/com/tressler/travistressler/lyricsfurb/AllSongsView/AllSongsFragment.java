@@ -20,6 +20,7 @@ import com.tressler.travistressler.lyricsfurb.Application.di.LyricsApplication;
 import com.tressler.travistressler.lyricsfurb.MainView.MainActivity;
 import com.tressler.travistressler.lyricsfurb.R;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
+import com.tressler.travistressler.lyricsfurb.SingleLyricsView.SingleLyricsFragment;
 import com.tressler.travistressler.lyricsfurb.Util.SongListAdapter;
 
 import java.util.List;
@@ -151,6 +152,13 @@ public class AllSongsFragment extends Fragment implements AllSongsView, SongList
         Toast.makeText(getContext(), "Song Successfully Deleted!", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void launchSingleLyricsFragment(Bundle bundle) {
+        SingleLyricsFragment singleLyricsFragment = SingleLyricsFragment.newInstance();
+        singleLyricsFragment.setArguments(bundle);
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder, singleLyricsFragment).commit();
+        ((MainActivity)getActivity()).stopScrolling();
+    }
 
 
     @Override
@@ -160,7 +168,7 @@ public class AllSongsFragment extends Fragment implements AllSongsView, SongList
 
     @Override
     public void onAllSongCellClicked(SongEntity songEntity) {
-
+        presenter.cellClicked(songEntity);
     }
 
     @Override

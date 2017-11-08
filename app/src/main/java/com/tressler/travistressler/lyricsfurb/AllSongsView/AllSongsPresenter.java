@@ -1,5 +1,7 @@
 package com.tressler.travistressler.lyricsfurb.AllSongsView;
 
+import android.os.Bundle;
+
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.PlaylistEntity;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongDatabase;
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
@@ -94,4 +96,10 @@ public class AllSongsPresenter {
         view.toastDeleteSuccessful();
     }
 
+    public void cellClicked(SongEntity songEntity) {
+        Bundle bundle = new Bundle();
+        bundle.putString("SONG", songEntity.getSongTitle());
+        bundle.putString("LYRICS", songEntity.getSongLyrics());
+        view.launchSingleLyricsFragment(bundle);
+    }
 }

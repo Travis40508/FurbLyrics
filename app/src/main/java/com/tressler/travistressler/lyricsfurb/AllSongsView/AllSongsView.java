@@ -1,5 +1,7 @@
 package com.tressler.travistressler.lyricsfurb.AllSongsView;
 
+import android.os.Bundle;
+
 import com.tressler.travistressler.lyricsfurb.Repository.lyricsdatabase.SongEntity;
 
 import java.util.List;
@@ -26,4 +28,5 @@ public interface AllSongsView {
 
     void toastDeleteSuccessful();
 
+    void launchSingleLyricsFragment(Bundle bundle);
 }

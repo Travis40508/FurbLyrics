@@ -8,6 +8,7 @@ import com.tressler.travistressler.lyricsfurb.LyricsView.LyricsFragment;
 import com.tressler.travistressler.lyricsfurb.MainView.MainActivity;
 import com.tressler.travistressler.lyricsfurb.PlayListView.PlayListFragment;
 import com.tressler.travistressler.lyricsfurb.PlaylistsView.PlayListsFragment;
+import com.tressler.travistressler.lyricsfurb.SingleLyricsView.SingleLyricsFragment;
 import com.tressler.travistressler.lyricsfurb.SplashView.SplashActivity;
 
 import javax.inject.Singleton;
@@ -38,4 +39,6 @@ public interface ApplicationComponent {
     void inject(AddToPlaylistFragment addToPlaylistFragment);
 
     void inject(LyricsFragment lyricsFragment);
+
+    void inject(SingleLyricsFragment singleLyricsFragment);
 }
