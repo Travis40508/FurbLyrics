@@ -37,6 +37,7 @@ public class LyricsFragment extends Fragment implements LyricsView {
 
     private MainPagerAdapter pagerAdapter;
 
+    private int position;
 
 
     @Nullable
@@ -45,6 +46,7 @@ public class LyricsFragment extends Fragment implements LyricsView {
         View view = inflater.inflate(R.layout.fragment_lyrics, container, false);
         ButterKnife.bind(this, view);
         ((LyricsApplication) getActivity().getApplication()).getComponent().inject(this);
+        position = getArguments().getInt("POSITION");
         return view;
     }
 
@@ -52,12 +54,21 @@ public class LyricsFragment extends Fragment implements LyricsView {
     public void onStart() {
         super.onStart();
         presenter.attachView(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         String playlistName = getArguments().getString("PLAYLIST");
-        int position = getArguments().getInt("POSITION");
         presenter.songsRetrieved(playlistName, position);
         pagerAdapter = new MainPagerAdapter();
         pager.setAdapter(pagerAdapter);
-
     }
 
     public static LyricsFragment newInstance() {
@@ -87,5 +98,10 @@ public class LyricsFragment extends Fragment implements LyricsView {
     @Override
     public void showPlaylistTitle(String playListName) {
         playListTitle.setText(playListName);
+    }
+
+    @Override
+    public void setPagePosition() {
+        position = pager.getCurrentItem();
     }
 }

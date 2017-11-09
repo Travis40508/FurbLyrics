@@ -51,4 +51,8 @@ public class LyricsPresenter {
             }
         });
     }
+
+    public void onPause() {
+        view.setPagePosition();
+    }
 }

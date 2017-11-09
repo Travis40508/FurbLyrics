@@ -12,4 +12,6 @@ public interface LyricsView {
     void showLyricsForPlaylist(List<SongEntity> lyricsList, int position);
 
     void showPlaylistTitle(String playListName);
+
+    void setPagePosition();
 }
