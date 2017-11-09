@@ -88,7 +88,7 @@ public class AllSongsFragment extends Fragment implements AllSongsView, SongList
     @Override
     public void launchAddSongFragment() {
         ((MainActivity)getActivity()).stopScrolling();
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder, AddSongFragment.newInstance()).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fragment_holder, AddSongFragment.newInstance()).commit();
     }
 
 
@@ -155,7 +155,7 @@ public class AllSongsFragment extends Fragment implements AllSongsView, SongList
     public void launchSingleLyricsFragment(Bundle bundle) {
         SingleLyricsFragment singleLyricsFragment = SingleLyricsFragment.newInstance();
         singleLyricsFragment.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder, singleLyricsFragment).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fragment_holder, singleLyricsFragment).commit();
         ((MainActivity)getActivity()).stopScrolling();
     }
 

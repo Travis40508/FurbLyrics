@@ -26,6 +26,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     public void startMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         finish();
     }
 

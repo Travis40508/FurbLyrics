@@ -69,19 +69,19 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void removeFragment() {
-        getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.fragment_holder)).commit();
+        getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).remove(getSupportFragmentManager().findFragmentById(R.id.fragment_holder)).commit();
         viewPager.setSwipeable(true);
     }
 
     @Override
     public void removeCreatePlayListFragment() {
-        getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlists)).commit();
+        getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).remove(getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlists)).commit();
         viewPager.setSwipeable(true);
     }
 
     @Override
     public void removeAddToPlaylistFragment() {
-        getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlist)).commit();
+        getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).remove(getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlist)).commit();
     }
 
     @Override

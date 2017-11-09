@@ -86,7 +86,7 @@ public class PlayListsFragment extends Fragment implements PlayListsView, Playli
 
     @Override
     public void launchPlaylistCreator() {
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder_playlists, CreatePlayListFragment.newInstance()).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fragment_holder_playlists, CreatePlayListFragment.newInstance()).commit();
     }
 
     @Override
@@ -117,7 +117,7 @@ public class PlayListsFragment extends Fragment implements PlayListsView, Playli
     public void launchPlaylistFragment(Bundle bundle) {
         PlayListFragment playListFragment = PlayListFragment.newInstance();
         playListFragment.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder_playlists, playListFragment).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fragment_holder_playlists, playListFragment).commit();
         ((MainActivity)getActivity()).stopScrolling();
     }
 

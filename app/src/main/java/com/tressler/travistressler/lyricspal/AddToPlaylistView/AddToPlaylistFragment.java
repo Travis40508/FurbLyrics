@@ -131,6 +131,6 @@ public class AddToPlaylistFragment extends Fragment implements AddToPlaylistView
     @Override
     public void detachFragment(List<String> newSongs) {
         getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlists).onResume();
-        getActivity().getSupportFragmentManager().beginTransaction().remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlist)).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_holder_playlist)).commit();
     }
 }

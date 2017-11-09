@@ -161,14 +161,14 @@ public class PlayListFragment extends Fragment implements PlayListView, SongList
     public void launchAddSongToPlaylistFragment(Bundle bundle) {
         AddToPlaylistFragment addToPlaylistFragment = AddToPlaylistFragment.newInstance();
         addToPlaylistFragment.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder_playlist, addToPlaylistFragment).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fragment_holder_playlist, addToPlaylistFragment).commit();
     }
 
     @Override
     public void showLyricsForPlaylist(Bundle bundle) {
         LyricsFragment lyricsFragment = LyricsFragment.newInstance();
         lyricsFragment.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder_playlist, lyricsFragment).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fragment_holder_playlist, lyricsFragment).commit();
     }
 
 
