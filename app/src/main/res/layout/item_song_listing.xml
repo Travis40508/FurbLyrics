@@ -14,20 +14,25 @@
         app:cardBackgroundColor="#000">
 
         <TextView
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="bold"
             android:layout_gravity="start|top"
             android:id="@+id/item_artist_name"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
             android:maxLines="1"
             android:text="Artist Name"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:letterSpacing=".05"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="25dp"
             android:layout_marginLeft="25dp"
             android:layout_gravity="center"
@@ -41,7 +46,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
+            android:textSize="17sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
